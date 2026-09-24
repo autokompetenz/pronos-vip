@@ -1,0 +1,664 @@
+PRONOS VIP — CAHIER DES CORRECTIONS DESIGN / UI-UX
+==============================================================
+
+OBJECTIF GLOBAL
+---------------
+Transformer le site PRONOS VIP en une plateforme de pronostics à l'apparence premium, moderne, crédible et professionnelle.
+
+Direction artistique recommandée :
+- Style : Dark Luxury Sports
+- Fond principal : #08090C
+- Surfaces/cartes : #111318 et #171A21
+- Or premium : #D4AF37
+- Or clair : #F0D878
+- Texte principal : #FFFFFF
+- Texte secondaire : #9298A5
+- Vert : #22C55E pour les réussites
+- Rouge : #EF4444 pour les pertes/alertes
+- Éviter l'abus de bleu, cyan, indigo et gradients multiples.
+- Utiliser les couleurs avec parcimonie : le doré doit servir à l'identité et aux CTA importants.
+
+RÈGLE GÉNÉRALE
+--------------
+Le problème actuel n'est pas seulement la palette de couleurs. La priorité est de revoir :
+1. La hiérarchie visuelle.
+2. La composition des sections.
+3. La quantité de texte visible.
+4. La répétition des CTA.
+5. Le système de cartes.
+6. La cohérence desktop/mobile.
+7. La perception premium.
+
+Principe :
+90 % sobre + 10 % spectaculaire.
+Ne pas mettre des ombres, gradients, glow et gros border-radius sur tous les éléments.
+
+
+1. HEADER
+----------
+Conserver la structure générale mais simplifier.
+
+Navigation recommandée :
+- Accueil
+- Comment ça marche
+- Tarifs
+- Résultats
+- FAQ
+- CTA "REJOINDRE LE VIP"
+
+Supprimer les éléments de navigation secondaires qui surchargent le header.
+
+Le CTA principal doit être immédiatement identifiable.
+
+Desktop :
+- Header compact.
+- Logo bien visible.
+- Navigation espacée.
+- Un seul CTA principal.
+
+Mobile :
+- Logo
+- Menu hamburger
+- CTA facilement accessible
+
+Le header doit rester discret et ne pas concurrencer le Hero.
+
+
+2. HERO — REFONTE PRIORITAIRE
+-----------------------------
+Le Hero doit être la section la plus forte de la page.
+
+Structure recommandée :
+
+PRONOS VIP
+
+LES PRONOSTICS QUI FONT
+LA DIFFÉRENCE
+
+"Analyses sportives et accompagnement VIP pour gérer votre expérience de pari."
+
+CTA principal :
+[ REJOINDRE LE VIP ]
+
+CTA secondaire éventuel :
+[ NOUS CONTACTER SUR TELEGRAM ]
+
+Ajouter une carte visuelle de pronostic à côté du texte sur desktop.
+
+Exemple :
+- Match
+- Compétition
+- Pronostic
+- Cote
+- Statut/confiance
+
+Éviter les gros blocs de texte dans le Hero.
+
+Le visiteur doit comprendre le service en 3 secondes.
+
+
+3. BANDEAU BOOKMAKERS
+---------------------
+Conserver l'idée si elle est utile.
+
+Mais :
+- Réduire sa hauteur.
+- Réduire les effets lumineux.
+- Ne pas donner l'impression d'une publicité.
+- Harmoniser les logos avec la nouvelle identité sombre/or.
+
+
+4. SECTION "LE CONSTAT"
+----------------------
+PROBLÈME ACTUEL :
+Trop de texte et trop peu de hiérarchie.
+
+REFONTE :
+Présenter d'abord le problème en quelques phrases courtes.
+
+Exemple :
+
+LE PROBLÈME
+
+Vous pariez.
+Vous perdez.
+Vous recommencez.
+
+Puis :
+
+NOTRE SOLUTION
+
+✓ Gestion du compte
+✓ Sélection des paris
+✓ Suivi des résultats
+✓ Assistance
+
+Utiliser une séparation visuelle claire entre "Problème" et "Solution".
+
+Éviter les paragraphes très longs.
+
+
+5. SECTION "POURQUOI NOUS"
+-------------------------
+Transformer les avantages en vraie grille de cartes.
+
+Desktop : 2 × 2.
+Mobile : 1 × 1.
+
+Cartes :
+01 — EXPERTS
+02 — MEILLEURES COTES
+03 — PERFORMANCE
+04 — COMMISSION
+
+Chaque carte doit contenir :
+- Icône simple
+- Titre
+- Description courte
+- Pas de gros paragraphe
+
+Style :
+- Fond #111318
+- Bordure très légère
+- Radius environ 14–18 px
+- Ombre discrète
+- Petit accent doré au hover
+
+Ne pas utiliser un glow permanent.
+
+
+6. SECTION "COMMENT ÇA MARCHE"
+------------------------------
+Transformer les longs textes en timeline.
+
+Structure :
+
+01 — DÉPÔT
+Vous choisissez votre objectif.
+
+↓
+
+02 — GESTION
+Les opérations sont réalisées selon le fonctionnement du service.
+
+↓
+
+03 — SUIVI
+Vous suivez l'évolution du compte.
+
+↓
+
+04 — RETRAIT
+Vous êtes informé lorsque le retrait est possible.
+
+↓
+
+05 — COMMISSION
+La commission est appliquée selon les conditions affichées.
+
+Desktop :
+- Timeline à gauche
+- Visuel/screenshot à droite
+
+Mobile :
+- Timeline verticale
+
+
+7. SECTION "EXEMPLE CONCRET"
+----------------------------
+Transformer le contenu en calcul visuel.
+
+Exemple de présentation :
+
+EXEMPLE
+
+DÉPART
+50 000 FCFA
+
+↓
+
+OBJECTIF
+3 000 000 FCFA
+
+↓
+
+BÉNÉFICE / MONTANT FINAL
+À afficher selon les données réelles
+
+↓
+
+COMMISSION
+25 %
+
+↓
+
+MONTANT NET
+À calculer selon les conditions réelles
+
+IMPORTANT :
+Tout chiffre présenté comme exemple doit être clairement identifié comme simulation/exemple.
+Ne jamais présenter une simulation comme un gain garanti.
+
+
+8. SECTION "TARIFS / OBJECTIFS"
+------------------------------
+REFONTE IMPORTANTE.
+
+Éviter une longue rangée de cartes qui ressemble à un composant mobile.
+
+Desktop :
+Afficher les offres dans une grille propre.
+
+Chaque carte :
+- Montant / objectif
+- Frais correspondants
+- Informations essentielles
+- CTA "CHOISIR"
+
+Mettre éventuellement l'offre principale en évidence avec un badge :
+"POPULAIRE"
+
+Ne pas utiliser plusieurs couleurs différentes pour les cartes.
+
+Utiliser une seule identité visuelle avec l'or comme accent.
+
+Mobile :
+Les cartes peuvent être empilées ou défiler horizontalement si nécessaire.
+
+
+9. SECTION "COMMISSION 25 %"
+----------------------------
+Créer un bloc explicatif premium et très simple.
+
+Exemple :
+
+COMMISSION
+
+25 %
+
+Uniquement selon les bénéfices réalisés et les conditions du service.
+
+Éviter l'apparence d'un bloc d'alerte orange.
+
+Utiliser :
+- Noir
+- Gris
+- Or
+
+
+10. SECTION "NOTE / SÉCURITÉ"
+----------------------------
+Le bloc NB actuel est trop long.
+
+Le transformer en trois éléments :
+
+🔐 SÉCURITÉ
+Validation du propriétaire du compte.
+
+📱 VÉRIFICATION
+Code envoyé sur le moyen de contact associé.
+
+💳 RETRAIT
+Validation avant traitement.
+
+Conserver les détails importants mais les répartir visuellement.
+
+
+11. SECTION "COMMENT RETIRER LES GAINS"
+---------------------------------------
+Remplacer le long texte procédural par une interface en étapes.
+
+01 — OUVRIR LE SOLDE
+02 — CHOISIR RETRAIT
+03 — ENTRER LE MONTANT
+04 — CHOISIR LA MÉTHODE
+05 — VALIDER
+06 — TERMINÉ
+
+Ajouter les screenshots à côté des étapes importantes.
+
+Desktop :
+Étapes à gauche + screenshot à droite.
+
+Mobile :
+Étapes verticales + screenshot.
+
+
+12. SECTION "PREUVES / RÉSULTATS"
+---------------------------------
+Conserver le carousel existant.
+
+Améliorer la présentation :
+
+RÉSULTATS
+
+Des résultats documentés
+
+[ SCREENSHOT ]
+
+● ○ ○ ○
+
+← précédent       suivant →
+
+Ajouter une petite mention de transparence :
+"Les captures présentées sont fournies à titre illustratif. Les performances passées ne garantissent pas les résultats futurs."
+
+Ne pas inventer de chiffres de performance.
+
+
+13. SECTION "STATISTIQUES / PERFORMANCES"
+-----------------------------------------
+Ajouter une section dédiée si les données réelles sont disponibles.
+
+Exemple :
+
+RÉSULTATS
+
+XXX
+Pronostics
+
+XX %
+Taux de réussite
+
+XX
+Membres
+
+XX
+Résultats suivis
+
+Puis éventuellement un graphique d'historique.
+
+IMPORTANT :
+Utiliser uniquement des données réelles et vérifiables.
+Aucun faux taux de réussite.
+
+
+14. CTA FINAL
+-------------
+REFONTE IMPORTANTE.
+
+Éviter plusieurs paragraphes marketing.
+
+Structure :
+
+PRÊT À COMMENCER ?
+
+Découvrez notre fonctionnement et choisissez
+votre formule.
+
+[ REJOINDRE SUR TELEGRAM ]
+
+[ APPELER ]
+
+Code promo : XXXXX
+
+Le CTA final doit être très visuel, avec beaucoup d'espace vide.
+
+
+15. CTA / BOUTONS
+-----------------
+Créer une hiérarchie claire.
+
+CTA PRINCIPAL :
+REJOINDRE LE VIP
+
+CTA SECONDAIRE :
+NOUS CONTACTER SUR TELEGRAM
+
+CTA TERTIAIRE :
+En savoir plus / Voir les détails
+
+Ne pas utiliser deux gros boutons dans chaque section.
+
+Les CTA doivent avoir :
+- même hauteur
+- même radius
+- même typographie
+- même style
+- même animation hover
+
+Le bouton principal peut utiliser le doré.
+
+
+16. SYSTÈME DE CARTES
+---------------------
+Réduire l'effet "carte partout".
+
+Style recommandé :
+
+background: #111318;
+border: 1px solid rgba(212,175,55,0.15);
+border-radius: 16px;
+
+Éviter :
+- border-radius excessif
+- glow permanent
+- ombres énormes
+- gradients sur toutes les cartes
+
+Utiliser le hover uniquement pour renforcer la sensation interactive.
+
+
+17. TYPOGRAPHIE
+--------------
+Créer une hiérarchie forte.
+
+H1 :
+Très grand, mais court.
+
+H2 :
+32–44 px environ desktop.
+
+H3 :
+20–24 px.
+
+Texte :
+15–18 px.
+
+Petits labels :
+12–14 px.
+
+Ne pas mettre les paragraphes importants en trop petits caractères.
+
+Limiter les lignes de texte à une largeur confortable.
+
+
+18. ESPACEMENTS
+---------------
+Créer davantage d'espace entre les sections.
+
+Chaque section doit avoir :
+- espace supérieur important
+- titre
+- sous-titre court
+- contenu
+- espace inférieur
+
+Éviter que toutes les sections soient collées.
+
+Les sections premium doivent respirer.
+
+
+19. RESPONSIVE MOBILE
+---------------------
+Priorité élevée.
+
+Sur mobile :
+- Hero plus court.
+- H1 réduit.
+- CTA pleine largeur.
+- Cartes 1 colonne.
+- Timeline verticale.
+- Screenshots adaptés à la largeur.
+- Navigation hamburger.
+- Éviter les textes trop longs.
+- Bouton CTA fixe en bas uniquement s'il reste discret.
+
+Le mobile doit sembler conçu pour mobile, pas simplement être une version réduite du desktop.
+
+
+20. ANIMATIONS
+--------------
+Conserver les animations utiles.
+
+Utiliser :
+- fade-in léger
+- translate léger
+- hover subtil
+- transition 200–300 ms
+
+Éviter :
+- animations permanentes trop fortes
+- gros glow
+- mouvements répétitifs
+- éléments qui attirent constamment l'attention
+
+Respecter prefers-reduced-motion.
+
+
+21. FOOTER
+----------
+Conserver la structure générale mais simplifier.
+
+Contenu :
+- Logo
+- Courte description
+- Navigation
+- Contact
+- Telegram
+- Mentions légales
+- Confidentialité
+- Jeu responsable
+
+Éviter trop de texte.
+
+
+22. COHÉRENCE GLOBALE
+---------------------
+Toute la page doit donner l'impression d'être un seul produit.
+
+À uniformiser :
+- boutons
+- cards
+- radius
+- ombres
+- icônes
+- titres
+- espacements
+- couleurs
+- animations
+
+Ne pas avoir une section qui ressemble à une autre application.
+
+
+23. ORDRE FINAL RECOMMANDÉ DES SECTIONS
+---------------------------------------
+1. Header
+2. Hero
+3. Bandeau bookmakers
+4. Le problème
+5. Notre solution / Pourquoi nous
+6. Comment ça marche
+7. Exemple concret
+8. Tarifs / Objectifs
+9. Commission
+10. Sécurité / Vérification
+11. Comment retirer
+12. Résultats / Preuves
+13. FAQ
+14. CTA final
+15. Footer
+
+
+24. ÉLÉMENTS À SUPPRIMER OU RÉDUIRE
+-----------------------------------
+Réduire fortement :
+- gradients bleus/cyan
+- glow
+- gros textes marketing
+- paragraphes très longs
+- cartes trop arrondies
+- répétition de Telegram + Appeler
+- CTA identiques dans toutes les sections
+- animations permanentes
+- blocs orange trop imposants
+
+
+25. PRIORITÉS DE DÉVELOPPEMENT
+------------------------------
+PRIORITÉ 1 :
+- Refaire le Hero
+- Nouvelle palette
+- Refaire les cartes
+- Refaire les CTA
+- Refaire Tarifs
+- Refaire le CTA final
+
+PRIORITÉ 2 :
+- Refaire "Le constat"
+- Refaire "Pourquoi nous"
+- Refaire "Comment ça marche"
+- Refaire l'exemple concret
+- Refaire le guide retrait
+
+PRIORITÉ 3 :
+- Améliorer Preuves
+- Ajouter Résultats si données réelles
+- Améliorer FAQ
+- Finaliser Footer
+- Optimiser mobile
+
+PRIORITÉ 4 :
+- Micro-animations
+- Hover
+- Transitions
+- Détails visuels
+
+
+26. RÈGLE DE CRÉDIBILITÉ
+------------------------
+Le design doit donner une impression professionnelle sans promettre de gains garantis.
+
+Éviter les formulations du type :
+- "gains garantis"
+- "vous allez gagner"
+- "100 % de réussite"
+- "devenez riche"
+- "sans risque"
+
+Privilégier :
+- analyses
+- suivi
+- historique
+- transparence
+- fonctionnement
+- conditions clairement affichées
+
+Ajouter une mention de jeu responsable et rappeler que les performances passées ne garantissent pas les résultats futurs.
+
+
+RÉSULTAT ATTENDU
+----------------
+Le site final doit ressembler à une plateforme sportive premium :
+
+DARK
++
+GOLD
++
+DATA
++
+SPORT
++
+TRANSPARENCE
+
+et non à une simple landing page avec beaucoup de gradients et de texte.
+
+NE PAS REFAIRE LE PROJET DEPUIS ZÉRO.
+Conserver l'architecture React/Vite et les composants existants lorsque cela est pertinent.
+La refonte doit principalement concerner :
+- JSX des sections
+- CSS
+- responsive
+- hiérarchie visuelle
+- composants UI
+- cohérence graphique.
