@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { TELEGRAM, TELEGRAM_TEXT, PHONE, PHONE_HREF } from './CtaButtons.jsx'
 
 export default function Footer() {
@@ -10,7 +11,7 @@ export default function Footer() {
               <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true" style={{ color: '#d4af37' }}>
                 <path d="M10 6l6 6-6 6 1.5 1.5L19 12l-7.5-7.5L10 6zm-6 0l6 6-6 6L5.5 19 13 12 5.5 4.5 4 6z" />
               </svg>
-              PRONOS&nbsp;<em>VIP</em>
+              COMPTE&nbsp;<em>1XBET RUSSE</em>
             </p>
             <p className="footer-desc">
               Analyses sportives et accompagnement VIP pour gérer votre expérience de pari, dans
@@ -21,11 +22,12 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Navigation</h4>
             <nav className="footnav" aria-label="Pied de page">
-              <a href="#accueil">Accueil</a>
-              <a href="#marche">Comment ça marche</a>
-              <a href="#conditions">Tarifs</a>
-              <a href="#preuves">Résultats</a>
-              <a href="#faq">FAQ</a>
+              <Link to="/">Accueil</Link>
+              <Link to="/gestion-de-compte">Gestion de compte</Link>
+              <Link to="/gestion-de-compte#marche">Comment ça marche</Link>
+              <Link to="/gestion-de-compte#conditions">Tarifs</Link>
+              <Link to="/gestion-de-compte#preuves">Résultats</Link>
+              <Link to="/gestion-de-compte#faq">FAQ</Link>
             </nav>
           </div>
 
@@ -55,7 +57,7 @@ export default function Footer() {
             l’addiction. Les performances passées ne garantissent pas les résultats futurs.
           </p>
           <p className="copyright">
-            Copyright © 2026 <a href="#accueil">PRONOS VIP</a>. Tous droits réservés.
+            Copyright © 2026 <Link to="/">COMPTE 1XBET RUSSE</Link>. Tous droits réservés.
           </p>
         </div>
       </div>

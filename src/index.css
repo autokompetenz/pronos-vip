@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PRONOS VIP — Format de sections type Autopark
+   COMPTE 1XBET RUSSE — Format de sections type Autopark
    Fond clair, identité or. Sections généreuses (conteneur 1200), bandeau
    eyebrow + titre fluid + sous-titre, fonds alternés + bordures 1px,
    reveal au scroll, timeline zigzag desktop / rail mobile.
@@ -151,7 +151,7 @@ p {
 
 .brand-name {
   font-family: var(--ff-display);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--ink);
   letter-spacing: -0.02em;
@@ -387,6 +387,7 @@ p {
   text-align: left;
 }
 
+.section-headline h1,
 .section-headline h2,
 .section h2 {
   font-size: clamp(26px, 5.2vw, 42px);
@@ -412,6 +413,15 @@ p {
   background: #fff;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+}
+
+/* Page intérieure (Gestion de compte) : en-tête compact */
+.section-pad.page-hero {
+  padding-bottom: 32px;
+}
+
+.page-hero .section-headline {
+  margin-bottom: 24px;
 }
 
 .section-cta {
@@ -2032,7 +2042,17 @@ p {
   }
 }
 
+@media (max-width: 480px) {
+  .brand-live {
+    display: none;
+  }
+}
+
 @media (min-width: 640px) {
+  .brand-name {
+    font-size: 18px;
+  }
+
   .section-pad {
     padding: 80px 28px;
   }
