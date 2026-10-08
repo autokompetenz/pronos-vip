@@ -5,6 +5,7 @@ import { TELEGRAM } from './CtaButtons.jsx'
 const NAV = [
   ['/', 'Accueil'],
   ['/gestion-de-compte', 'Gestion de compte'],
+  ['/compte-russe', 'Compte russe'],
   ['/gestion-de-compte#marche', 'Comment ça marche'],
   ['/gestion-de-compte#conditions', 'Tarifs'],
   ['/gestion-de-compte#preuves', 'Résultats'],

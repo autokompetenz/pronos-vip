@@ -5,6 +5,7 @@ import Footer from './components/Footer.jsx'
 import BottomCta from './components/BottomCta.jsx'
 import Home from './pages/Home.jsx'
 import GestionCompte from './pages/GestionCompte.jsx'
+import CompteRusse from './pages/CompteRusse.jsx'
 
 function ScrollManager() {
   const { pathname, hash } = useLocation()
@@ -52,6 +53,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/gestion-de-compte" element={<GestionCompte />} />
+            <Route path="/compte-russe" element={<CompteRusse />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </main>
