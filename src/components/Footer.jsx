@@ -8,11 +8,13 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-3">
           <div>
             <p className="flex items-center gap-2 text-base font-black tracking-tight text-slate-900">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand text-white">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
-                  <path d="M10 6l6 6-6 6 1.5 1.5L19 12l-7.5-7.5L10 6zm-6 0l6 6-6 6L5.5 19 13 12 5.5 4.5 4 6z" />
-                </svg>
-              </span>
+              <img
+                src="/images/logo-vip.svg"
+                alt=""
+                width="32"
+                height="32"
+                className="h-8 w-8 rounded-lg"
+              />
               COMPTE <span className="text-brand">1XBET RUSSE</span>
             </p>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-slate-600">

@@ -29,11 +29,13 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md">
       <div className="container-x flex items-center justify-between py-3">
         <Link to="/" onClick={close} className="flex items-center gap-2.5" aria-label="COMPTE 1XBET RUSSE — Accueil">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand text-white shadow-sm">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-              <path d="M10 6l6 6-6 6 1.5 1.5L19 12l-7.5-7.5L10 6zm-6 0l6 6-6 6L5.5 19 13 12 5.5 4.5 4 6z" />
-            </svg>
-          </span>
+          <img
+            src="/images/logo-vip.svg"
+            alt=""
+            width="36"
+            height="36"
+            className="h-9 w-9 rounded-xl shadow-sm"
+          />
           <span className="text-base font-black tracking-tight text-slate-900 sm:text-lg">
             COMPTE <span className="text-brand">1XBET RUSSE</span>
           </span>
