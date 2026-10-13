@@ -6,8 +6,8 @@ export const WHATSAPP = 'https://wa.me/19718659629'
 
 export default function CtaButtons({ secondary = false }) {
   return (
-    <div className="cta-row">
-      <a className="btn btn--gold" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
+    <div className="flex flex-wrap gap-3">
+      <a className="btn btn--primary" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
         Rejoindre le VIP
       </a>
       {secondary && (

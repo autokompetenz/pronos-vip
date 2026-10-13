@@ -35,7 +35,7 @@ export default function ProofsCarousel() {
       slides={PROOFS.map(({ src, w, h, alt }) => (
         <img
           key={src}
-          className="carousel-img"
+          className="h-72 w-52 shrink-0 rounded-2xl border border-slate-200 bg-slate-50 object-contain p-1 shadow-soft sm:w-60"
           src={src}
           alt={alt}
           width={w}

@@ -121,28 +121,25 @@ const FAQ = [
 
 function OptionCard({ option }) {
   return (
-    <div className={option.popular ? 'pricing pricing--popular' : 'pricing'}>
-      {option.popular && <span className="pricing-badge">Le plus choisi</span>}
-      <p className="pricing-label">{option.title}</p>
-      <p className="pricing-target">{option.target}</p>
-      <p className="pricing-deposit">
-        <strong>{option.deposit}</strong> de dépôt seulement
+    <div
+      className={`relative flex w-[240px] shrink-0 flex-col rounded-2xl border bg-white p-6 shadow-soft sm:w-[260px] ${
+        option.popular ? 'border-brand ring-2 ring-brand/15' : 'border-slate-200'
+      }`}
+    >
+      {option.popular && (
+        <span className="absolute -top-3 left-6 rounded-full bg-brand px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
+          Le plus choisi
+        </span>
+      )}
+      <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{option.title}</p>
+      <p className="mt-1 text-2xl font-black text-slate-900 tnum">{option.target}</p>
+      <p className="mt-2 text-sm text-slate-600">
+        <strong className="text-slate-900">{option.deposit}</strong> de dépôt seulement
       </p>
-      <a className="pricing-cta" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
+      <a className="btn btn--primary mt-5" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
         Choisir
       </a>
     </div>
-  )
-}
-
-function OptionsCarousel() {
-  return (
-    <Carousel
-      label="Offres de gestion de compte 1xBet"
-      slides={OPTIONS.map((option) => (
-        <OptionCard key={option.title} option={option} />
-      ))}
-    />
   )
 }
 
@@ -153,8 +150,9 @@ export default function GestionCompte() {
 
   return (
     <>
-      <section className="section-pad page-hero">
-        <div className="container">
+      {/* Hero */}
+      <section className="bg-gradient-to-b from-blue-50 via-blue-50/40 to-white">
+        <div className="container-x py-14 sm:py-20">
           <Reveal>
             <SectionHead
               as="h1"
@@ -164,15 +162,16 @@ export default function GestionCompte() {
             />
           </Reveal>
           <Reveal delay={90}>
-            <div className="cta-row section-cta">
+            <div className="mt-7">
               <CtaButtons secondary />
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="section-pad section--alt" id="service">
-        <div className="container">
+      {/* 01 Pourquoi nous */}
+      <section id="service" className="section section--alt">
+        <div className="container-x">
           <Reveal>
             <SectionHead
               num="01"
@@ -181,30 +180,31 @@ export default function GestionCompte() {
               sub="Vous nous confiez votre compte 1xBet. Nos experts sélectionnent les paris, placent au bon moment et suivent chaque résultat."
             />
           </Reveal>
-          <ul className="cards">
+          <ul className="mt-10 grid gap-5 sm:grid-cols-2">
             {BENEFITS.map((b, i) => (
               <Reveal as="li" key={b.title} delay={i * 70}>
-                <div className="benefit">
-                  <span className="benefit-icon" aria-hidden="true">{b.icon}</span>
-                  <div className="benefit-top">
-                    <h3 className="benefit-title">{b.title}</h3>
-                    <span className="benefit-index">{b.index}</span>
+                <div className="card h-full p-6">
+                  <span className="text-2xl" aria-hidden="true">{b.icon}</span>
+                  <div className="mt-4 flex items-center justify-between">
+                    <h3 className="text-lg font-bold text-slate-900">{b.title}</h3>
+                    <span className="text-sm font-black text-slate-300">{b.index}</span>
                   </div>
-                  <p className="benefit-text">{b.text}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{b.text}</p>
                 </div>
               </Reveal>
             ))}
           </ul>
           <Reveal delay={160}>
-            <div className="cta-row section-cta">
+            <div className="mt-8">
               <CtaButtons />
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="section-pad" id="marche">
-        <div className="container">
+      {/* 02 Comment ça marche */}
+      <section id="marche" className="section">
+        <div className="container-x">
           <Reveal>
             <SectionHead
               num="02"
@@ -213,29 +213,35 @@ export default function GestionCompte() {
               sub="De votre dépôt jusqu’à l’encaissement, chaque étape est claire, suivie et sans stress."
             />
           </Reveal>
-          <ol className="timeline">
+          <ol className="mt-10 space-y-4">
             {STEPS.map((s, i) => (
-              <Reveal as="li" className="timeline-row" key={s.title} delay={i * 80}>
-                <span className="timeline-stone" aria-hidden="true">{s.icon}</span>
-                <div className="timeline-card">
-                  <span className="timeline-chip">STEP {fmt(i + 1)}</span>
-                  <h3 className="timeline-title">{s.title}</h3>
-                  <p className="timeline-text">{s.text}</p>
+              <Reveal as="li" key={s.title} delay={i * 80} className="flex gap-4">
+                <span
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-xl"
+                  aria-hidden="true"
+                >
+                  {s.icon}
+                </span>
+                <div className="card flex-1 p-5">
+                  <span className="label-meta text-brand">STEP {fmt(i + 1)}</span>
+                  <h3 className="mt-1 font-bold text-slate-900">{s.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-600">{s.text}</p>
                 </div>
               </Reveal>
             ))}
           </ol>
+
           <Reveal delay={100}>
-            <div className="scene-duo">
-              <div className="split-card">
-                <h3>Vous gardez la maîtrise</h3>
-                <p>
-                  Vous suivez l’évolution du compte à chaque résultat, informé immédiatement dès
-                  que le retrait devient possible.
+            <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+              <div className="card p-6">
+                <h3 className="text-lg font-bold text-slate-900">Vous gardez la maîtrise</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                  Vous suivez l’évolution du compte à chaque résultat, informé immédiatement dès que
+                  le retrait devient possible.
                 </p>
               </div>
               <img
-                className="lead-img"
+                className="w-full rounded-2xl border border-slate-200 shadow-soft"
                 src="/images/deposit-app.webp"
                 alt="la gestion de compte 1xbet — dépôt depuis l’application"
                 width="1280"
@@ -247,8 +253,9 @@ export default function GestionCompte() {
         </div>
       </section>
 
-      <section className="section-pad section--alt" id="exemple">
-        <div className="container">
+      {/* 03 Exemple concret */}
+      <section id="exemple" className="section section--alt">
+        <div className="container-x">
           <Reveal>
             <SectionHead
               num="03"
@@ -258,15 +265,24 @@ export default function GestionCompte() {
             />
           </Reveal>
           <Reveal delay={80}>
-            <div className="flow-card">
+            <div className="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-soft">
               {FLOW.map((f, i) => (
-                <div className="flow-row" key={f.label}>
-                  <span className="flow-num">{i + 1}</span>
-                  <span className="flow-label">{f.label}</span>
+                <div
+                  key={f.label}
+                  className={`flex items-center justify-between gap-4 px-5 py-4 ${
+                    i % 2 ? 'bg-surface-subtle' : ''
+                  }`}
+                >
+                  <span className="flex items-center gap-3">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-light text-xs font-bold text-brand">
+                      {i + 1}
+                    </span>
+                    <span className="text-sm font-semibold text-slate-600">{f.label}</span>
+                  </span>
                   <span
-                    className={
-                      i === FLOW.length - 1 ? 'flow-value flow-value--net' : 'flow-value'
-                    }
+                    className={`text-sm font-black tnum ${
+                      i === FLOW.length - 1 ? 'text-brand' : 'text-slate-900'
+                    }`}
                   >
                     {f.value}
                   </span>
@@ -275,24 +291,24 @@ export default function GestionCompte() {
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <p className="flow-note">
+            <p className="mt-6 text-sm font-semibold text-slate-700">
               Zéro stress : vous suivez l’évolution, nos experts travaillent, vous encaissez.
             </p>
-            <p className="flow-sim">
-              Simulation illustrative : les résultats réels varient selon les marchés et les
-              cotes.
+            <p className="mt-1 text-xs text-slate-400">
+              Simulation illustrative : les résultats réels varient selon les marchés et les cotes.
             </p>
           </Reveal>
           <Reveal delay={150}>
-            <div className="cta-row">
+            <div className="mt-8">
               <CtaButtons />
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="section-pad" id="conditions">
-        <div className="container">
+      {/* 04 Tarifs */}
+      <section id="conditions" className="section">
+        <div className="container-x">
           <Reveal>
             <SectionHead
               num="04"
@@ -302,57 +318,83 @@ export default function GestionCompte() {
             />
           </Reveal>
           <Reveal delay={80}>
-            <OptionsCarousel />
-          </Reveal>
-          <p className="note-line">La commission, seulement si vous gagnez</p>
-          <Reveal delay={60}>
-            <div className="commission">
-              <h3 className="commission-title">Commission 25&nbsp;%</h3>
-              <p>Uniquement selon les bénéfices réalisés et les conditions du service.</p>
+            <div className="mt-10">
+              <Carousel
+                label="Offres de gestion de compte 1xBet"
+                slides={OPTIONS.map((option) => (
+                  <OptionCard key={option.title} option={option} />
+                ))}
+              />
             </div>
           </Reveal>
-          <h3 className="sub-title">Sécurité &amp; vérification</h3>
-          <div className="secure-grid">
+
+          <p className="mt-8 text-center text-sm font-semibold text-slate-500">
+            La commission, seulement si vous gagnez
+          </p>
+
+          <Reveal delay={60}>
+            <div className="mt-6 flex flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-6 py-8 text-center">
+              <span className="eyebrow">Commission</span>
+              <span className="text-5xl font-black text-slate-900 tnum">25&nbsp;%</span>
+              <p className="max-w-md text-sm leading-relaxed text-slate-600">
+                Uniquement selon les bénéfices réalisés et les conditions du service.
+              </p>
+            </div>
+          </Reveal>
+
+          <h3 className="mt-14 text-2xl font-black tracking-tight text-slate-900">
+            Sécurité &amp; vérification
+          </h3>
+          <div className="mt-6 grid gap-5 sm:grid-cols-3">
             {SECURITY.map((s, i) => (
-              <Reveal as="div" className="secure-item" key={s.title} delay={i * 70}>
-                <span className="secure-icon" aria-hidden="true">{s.icon}</span>
-                <h3>{s.title}</h3>
-                <p>{s.text}</p>
+              <Reveal as="div" key={s.title} delay={i * 70} className="card p-6">
+                <span className="text-2xl" aria-hidden="true">{s.icon}</span>
+                <h3 className="mt-3 font-bold text-slate-900">{s.title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-slate-600">{s.text}</p>
               </Reveal>
             ))}
           </div>
           <Reveal delay={90}>
-            <p className="secure-note">
-              Chaque retrait est soumis à une validation de sécurité. Nous ne travaillons
-              qu’avec des personnes sérieuses —{' '}
-              <a className="mention" href={TELEGRAM} target="_blank" rel="noopener noreferrer">{TELEGRAM_TEXT}</a>.
+            <p className="mt-6 text-sm leading-relaxed text-slate-600">
+              Chaque retrait est soumis à une validation de sécurité. Nous ne travaillons qu’avec des
+              personnes sérieuses —{' '}
+              <a className="link" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
+                {TELEGRAM_TEXT}
+              </a>
+              .
             </p>
           </Reveal>
         </div>
       </section>
 
-      <section className="section-pad section--alt" id="retrait">
-        <div className="container">
+      {/* 05 Guide retrait */}
+      <section id="retrait" className="section section--alt">
+        <div className="container-x">
           <Reveal>
             <SectionHead
               num="05"
               eyebrow="Guide express"
-              title="Comment retirer les gains du compte&nbsp;?"
+              title="Comment retirer les gains du compte ?"
               sub="Rapide et sécurisé : encaissez en 5 à 10 minutes via Mobile Money ou crypto."
             />
           </Reveal>
           <Reveal delay={90}>
-            <div className="scene-duo">
-              <ol className="list-card">
+            <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+              <ol className="space-y-3">
                 {WITHDRAW_STEPS.map((step, i) => (
-                  <li className="list-row" key={i}>
-                    <span className="list-num">{i + 1}</span>
-                    <p>{step}</p>
+                  <li
+                    key={i}
+                    className="flex gap-3 rounded-xl border border-slate-200 bg-white p-3.5 shadow-soft"
+                  >
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">
+                      {i + 1}
+                    </span>
+                    <p className="text-sm leading-relaxed text-slate-700">{step}</p>
                   </li>
                 ))}
               </ol>
               <img
-                className="lead-img"
+                className="w-full rounded-2xl border border-slate-200 shadow-soft"
                 src="/images/retrait.jpg"
                 alt="1xBet — retirer des fonds (solde et méthodes)"
                 width="1024"
@@ -362,20 +404,24 @@ export default function GestionCompte() {
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <p className="contact-line">
+            <p className="mt-8 text-sm text-slate-600">
               Une question ? Écrivez-nous sur{' '}
-              <a className="contact-tg" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
+              <a className="link" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
                 Telegram
               </a>{' '}
               ({TELEGRAM_TEXT}) ou appelez-nous au{' '}
-              <a className="contact-phone" href={PHONE_HREF}>{PHONE}</a>.
+              <a className="link" href={PHONE_HREF}>
+                {PHONE}
+              </a>
+              .
             </p>
           </Reveal>
         </div>
       </section>
 
-      <section className="section-pad" id="preuves">
-        <div className="container">
+      {/* 06 Preuves */}
+      <section id="preuves" className="section">
+        <div className="container-x">
           <Reveal>
             <SectionHead
               num="06"
@@ -385,19 +431,22 @@ export default function GestionCompte() {
             />
           </Reveal>
           <Reveal delay={80}>
-            <ProofsCarousel />
+            <div className="mt-10">
+              <ProofsCarousel />
+            </div>
           </Reveal>
           <Reveal delay={100}>
-            <p className="carousel-note">
-              Les captures présentées sont fournies à titre illustratif. Les performances
-              passées ne garantissent pas les résultats futurs.
+            <p className="mt-6 text-center text-xs leading-relaxed text-slate-400">
+              Les captures présentées sont fournies à titre illustratif. Les performances passées ne
+              garantissent pas les résultats futurs.
             </p>
           </Reveal>
         </div>
       </section>
 
-      <section className="section-pad section--alt" id="faq">
-        <div className="container">
+      {/* 07 FAQ */}
+      <section id="faq" className="section section--alt">
+        <div className="container-x">
           <Reveal>
             <SectionHead
               num="07"
@@ -407,25 +456,33 @@ export default function GestionCompte() {
             />
           </Reveal>
           <Reveal delay={80}>
-            <div className="faq">
+            <div className="mt-10 space-y-3">
               {FAQ.map((item, i) => (
-                <details className="faq-item" key={item.q}>
-                  <summary>
-                    <span className="faq-num" aria-hidden="true">{fmt(i + 1)}</span>
-                    <span className="faq-q">{item.q}</span>
-                    <span className="faq-plus" aria-hidden="true">+</span>
+                <details key={item.q} className="group card overflow-hidden">
+                  <summary className="flex cursor-pointer list-none items-center gap-3 p-5 [&::-webkit-details-marker]:hidden">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-brand">
+                      {fmt(i + 1)}
+                    </span>
+                    <span className="flex-1 font-bold text-slate-900">{item.q}</span>
+                    <span className="text-xl leading-none text-brand transition-transform duration-200 group-open:rotate-45">
+                      +
+                    </span>
                   </summary>
-                  <p className="faq-body">{item.a}</p>
+                  <p className="border-t border-slate-100 px-5 py-4 text-sm leading-relaxed text-slate-600">
+                    {item.a}
+                  </p>
                 </details>
               ))}
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <div className="faq-more">
-              <h3>Encore une question ?</h3>
-              <p>Écrivez-nous sur Telegram ou WhatsApp, on vous répond rapidement.</p>
-              <div className="cta-row">
-                <a className="btn btn--gold" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
+            <div className="mt-8 rounded-2xl border border-blue-100 bg-blue-50/50 p-6 text-center">
+              <h3 className="text-lg font-bold text-slate-900">Encore une question ?</h3>
+              <p className="mt-1 text-sm text-slate-600">
+                Écrivez-nous sur Telegram ou WhatsApp, on vous répond rapidement.
+              </p>
+              <div className="mt-4 flex flex-wrap justify-center gap-3">
+                <a className="btn btn--primary" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
                   Telegram
                 </a>
                 <a className="btn btn--ghost" href={WHATSAPP} target="_blank" rel="noopener noreferrer">

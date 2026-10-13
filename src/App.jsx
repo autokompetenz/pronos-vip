@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import BottomCta from './components/BottomCta.jsx'
@@ -45,16 +45,21 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollManager />
-      <div className="page" id="top">
-        <div className="progress" ref={progressRef} aria-hidden="true" />
+      <div className="min-h-[100dvh] bg-white pb-20 sm:pb-0">
+        <div
+          ref={progressRef}
+          className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left scale-x-0 bg-brand"
+          aria-hidden="true"
+        />
         <Header />
 
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<CompteRusse />} />
+            <Route path="/accueil" element={<Home />} />
             <Route path="/gestion-de-compte" element={<GestionCompte />} />
-            <Route path="/compte-russe" element={<CompteRusse />} />
-            <Route path="*" element={<Home />} />
+            <Route path="/compte-russe" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<CompteRusse />} />
           </Routes>
         </main>
 

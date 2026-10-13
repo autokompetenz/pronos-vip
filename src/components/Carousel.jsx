@@ -77,9 +77,11 @@ export default function Carousel({ slides, label, auto = false }) {
   const pause = () => setPaused(true)
   const resume = () => setPaused(false)
 
+  const arrowClass =
+    'hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-soft transition hover:bg-slate-50 sm:flex'
+
   return (
     <div
-      className="carousel"
       onMouseEnter={pause}
       onMouseLeave={resume}
       onTouchStart={pause}
@@ -87,9 +89,9 @@ export default function Carousel({ slides, label, auto = false }) {
       onFocusCapture={pause}
       onBlurCapture={resume}
     >
-      <div className="carousel-viewport">
+      <div className="flex items-center gap-3">
         <button
-          className="carousel-btn carousel-btn--prev"
+          className={arrowClass}
           type="button"
           aria-label={`${label} — précédent`}
           onClick={() => go(Math.max(0, index - 1))}
@@ -98,7 +100,7 @@ export default function Carousel({ slides, label, auto = false }) {
         </button>
 
         <div
-          className="carousel-track"
+          className="carousel-track flex-1 py-1"
           ref={trackRef}
           onScroll={onScroll}
           tabIndex={0}
@@ -110,7 +112,7 @@ export default function Carousel({ slides, label, auto = false }) {
         </div>
 
         <button
-          className="carousel-btn carousel-btn--next"
+          className={arrowClass}
           type="button"
           aria-label={`${label} — suivant`}
           onClick={() => go(Math.min(maxIndex, index + 1))}
@@ -119,11 +121,13 @@ export default function Carousel({ slides, label, auto = false }) {
         </button>
       </div>
 
-      <div className="carousel-dots" role="group" aria-label={label}>
+      <div className="mt-5 flex justify-center gap-2" role="group" aria-label={label}>
         {Array.from({ length: maxIndex + 1 }).map((_, i) => (
           <button
             key={i}
-            className={i === index ? 'carousel-dot carousel-dot--active' : 'carousel-dot'}
+            className={`h-2 rounded-full transition-all ${
+              i === index ? 'w-6 bg-brand' : 'w-2 bg-slate-300 hover:bg-slate-400'
+            }`}
             type="button"
             aria-label={`Aller au contenu ${i + 1}`}
             aria-current={i === index ? 'true' : undefined}

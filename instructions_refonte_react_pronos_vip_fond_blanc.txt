@@ -1,0 +1,436 @@
+# GUIDE DE REFONTE COMPLETE : PRONOS VIP (REACT + TAILWIND CSS)
+Theme : FOND BLANC (#FFFFFF) & BLEU TECH (#4D8EFF)
+
+---
+
+## 1. NETTOYAGE & RESET DE L'ANCIEN CODE SOURCE
+
+Pour repartir sur des bases saines et supprimer l'ancien design sombre ou obsolète :
+
+1. Dans votre fichier global CSS (`src/index.css` ou `src/App.css`) :
+   - Supprimez toutes les classes d'arrière-plan sombre résiduelles (`bg-gray-900`, `bg-slate-950`, `#0f131d`, etc.).
+   - Supprimez les styles CSS personnalisés non structurés.
+   - Appliquez le reset de base sur le body :
+   ```css
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+
+   body {
+     background-color: #ffffff;
+     color: #0f172a;
+     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+     -webkit-font-smoothing: antialiased;
+   }
+   ```
+
+2. Configuration `tailwind.config.js` :
+   Remplacez la section `theme.extend` pour intégrer directement la nouvelle palette :
+   ```javascript
+   module.exports = {
+     content: ["./src/**/*.{js,jsx,ts,tsx}"],
+     theme: {
+       extend: {
+         colors: {
+           brand: {
+             DEFAULT: '#4D8EFF',
+             light: '#EBF2FF',
+             dark: '#2B6EE3',
+             hover: '#3A7BEB'
+           },
+           surface: {
+             base: '#FFFFFF',
+             subtle: '#F8FAFC',
+             muted: '#F1F5F9',
+             border: '#E2E8F0'
+           },
+           success: {
+             DEFAULT: '#10B981',
+             light: '#ECFDF5',
+             text: '#047857'
+           },
+           danger: {
+             DEFAULT: '#EF4444',
+             light: '#FEF2F2',
+             text: '#B91C1C'
+           }
+         }
+       }
+     },
+     plugins: []
+   }
+   ```
+
+---
+
+## 2. PRINCIPES DU DESIGN SYSTEM (FOND BLANC & ACCENT BLEU)
+
+- **Fond d'application** : Blanc pur `#FFFFFF`.
+- **Conteneurs / Cartes** : Blanc pur `#FFFFFF` avec fine bordure `border border-slate-200` et ombre douce `shadow-sm`, ou fond subtil `#F8FAFC`.
+- **Couleur Primaire / Accent** : `#4D8EFF` pour tous les boutons principaux (CTA), badges actifs, jauges et liens clés.
+- **Typographie** :
+  - Titres : `#0F172A` (Slate 900), gras (`font-bold`).
+  - Textes secondaires : `#64748B` (Slate 500).
+- **Statuts & Cotes** :
+  - Badge Gagné : Fond vert doux `#ECFDF5`, texte `#047857`.
+  - Cotes : Chiffre bleu `#4D8EFF` ou `#0F172A` dans un encadré net `bg-slate-100` ou `bg-blue-50`.
+
+---
+
+## 3. STRUCTURE D'ARCHITECTURE REACT
+
+Structure de dossiers recommandée :
+```
+src/
+├── components/
+│   ├── layout/
+│   │   ├── Header.jsx        // En-tête avec logo Pronos VIP et avatar
+│   │   └── BottomNav.jsx     // Barre de navigation fixe (4 onglets)
+│   ├── pronos/
+│   │   ├── MatchCard.jsx     // Carte match (cotes, heure, analyse)
+│   │   └── QuickBetModal.jsx // Simulateur de mise dynamique
+│   ├── stats/
+│   │   ├── KpiGrid.jsx       // 4 cartes indicateurs (Taux 82.4%, etc.)
+│   │   └── BankrollChart.jsx // Graphique SVG linéaire bleu
+│   └── vip/
+│       ├── PricingCard.jsx   // Cartes formules avec badge populaire
+│       └── Testimonial.jsx   // Avis et notes certifiés
+├── pages/
+│   ├── PronosPage.jsx        // Écran 1 : Pronostics du jour
+│   ├── CombinesPage.jsx      // Écran 2 : Combinés VIP
+│   ├── StatsPage.jsx         // Écran 3 : Statistiques & Historique
+│   └── VipPage.jsx           // Écran 4 : Formules VIP
+└── App.jsx
+```
+
+---
+
+## 4. CODE DES COMPOSANTS CLÉS (TAILWIND READY)
+
+### A. Navigation Globale (Header & BottomNav)
+
+```jsx
+// src/components/layout/Header.jsx
+export function Header() {
+  return (
+    <header className="sticky top-0 z-50 flex items-center justify-between px-4 py-3 bg-white/95 backdrop-blur-md border-b border-slate-100">
+      <div className="flex items-center gap-2">
+        <div className="w-8 h-8 rounded-lg bg-[#4D8EFF] flex items-center justify-center text-white shadow-sm font-bold">
+          ⚡
+        </div>
+        <div className="text-lg font-black tracking-tight text-slate-900">
+          PRONOS <span className="text-[#4D8EFF]">VIP</span>
+        </div>
+      </div>
+      <button className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-200">
+        👤
+      </button>
+    </header>
+  );
+}
+
+// src/components/layout/BottomNav.jsx
+export function BottomNav({ activeTab, setActiveTab }) {
+  const tabs = [
+    { id: 'pronos', label: 'Pronos', icon: '⚽' },
+    { id: 'combines', label: 'Combinés', icon: '📋' },
+    { id: 'stats', label: 'Stats', icon: '📈' },
+    { id: 'vip', label: 'VIP Club', icon: '⭐' },
+  ];
+
+  return (
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 px-3 py-2 flex justify-around">
+      {tabs.map((tab) => {
+        const isActive = activeTab === tab.id;
+        return (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`flex flex-col items-center gap-1 text-xs font-semibold py-1 px-3 rounded-lg transition-colors ${
+              isActive ? 'text-[#4D8EFF]' : 'text-slate-400 hover:text-slate-600'
+            }`}
+          >
+            <span className="text-base">{tab.icon}</span>
+            <span>{tab.label}</span>
+          </button>
+        );
+      })}
+    </nav>
+  );
+}
+```
+
+---
+
+### B. Écran 1 : Pronostics du Jour (`PronosPage.jsx`)
+
+```jsx
+export function PronosPage() {
+  return (
+    <div className="min-h-screen bg-white pb-24 px-4 pt-4 space-y-4">
+      {/* Bandeau KPI rapide */}
+      <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+        <div>
+          <p className="text-xs text-slate-500 font-medium">Taux de réussite ce mois</p>
+          <p className="text-xl font-bold text-slate-900">84.6% <span className="text-emerald-500 text-sm">↗</span></p>
+        </div>
+        <div className="text-right">
+          <p className="text-xs text-slate-500 font-medium">Bilan Net</p>
+          <p className="text-xl font-bold text-[#4D8EFF]">+32.4 U</p>
+        </div>
+      </div>
+
+      {/* Carte Vedette : Pari du Jour */}
+      <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+        <div className="flex justify-between items-center text-xs">
+          <span className="bg-blue-50 text-[#4D8EFF] font-bold px-2.5 py-1 rounded-full">
+            ⭐ Pari du Jour
+          </span>
+          <span className="text-slate-400">Ce soir 21:00</span>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-slate-900">Real Madrid vs Manchester City</h2>
+          <p className="text-xs text-slate-500">Ligue des Champions • 1/4 finale</p>
+        </div>
+
+        <div className="p-3 bg-slate-50 rounded-xl flex items-center justify-between">
+          <div>
+            <p className="text-xs text-slate-500">Pari recommandé</p>
+            <p className="text-sm font-bold text-slate-900">Les 2 équipes marquent & +2.5 buts</p>
+          </div>
+          <div className="bg-[#4D8EFF] text-white font-extrabold px-3 py-1.5 rounded-lg text-lg">
+            1.95
+          </div>
+        </div>
+
+        <button className="w-full py-3 bg-[#4D8EFF] hover:bg-[#3A7BEB] text-white font-bold rounded-xl shadow-md transition-all">
+          ⚡ Miser sur ce prono (Cote 1.95)
+        </button>
+      </div>
+
+      {/* Liste des Pronostics Sécurisés & VIP Lock */}
+      <div className="space-y-3">
+        <h3 className="text-sm font-bold text-slate-900">Sélection du Jour</h3>
+
+        {/* Prono gratuit */}
+        <div className="p-3.5 rounded-xl border border-slate-200 bg-white flex justify-between items-center">
+          <div>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Gratuit</span>
+            <p className="text-sm font-bold text-slate-900 mt-1">Arsenal vs Chelsea</p>
+            <p className="text-xs text-slate-500">Victoire Arsenal</p>
+          </div>
+          <div className="text-right">
+            <span className="text-base font-black text-slate-900">1.62</span>
+          </div>
+        </div>
+
+        {/* Prono VIP Lock */}
+        <div className="p-3.5 rounded-xl border border-blue-200 bg-blue-50/50 flex justify-between items-center">
+          <div>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[#4D8EFF] bg-blue-100 px-2 py-0.5 rounded">VIP Verrouillé</span>
+            <p className="text-sm font-bold text-slate-900 mt-1">Ligue 1 • Info Confidentielle</p>
+            <p className="text-xs text-slate-500">Cote record 2.45 réservée aux membres</p>
+          </div>
+          <button className="px-3 py-1.5 bg-[#4D8EFF] text-white text-xs font-bold rounded-lg">
+            Débloquer
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+### C. Écran 2 : Combinés VIP (`CombinesPage.jsx`)
+
+```jsx
+import { useState } from 'react';
+
+export function CombinesPage() {
+  const [mise, setMise] = useState(50);
+  const cote = 4.85;
+
+  return (
+    <div className="min-h-screen bg-white pb-24 px-4 pt-4 space-y-4">
+      {/* En-tête du Ticket */}
+      <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-50 to-white border border-blue-100 shadow-sm space-y-2">
+        <div className="flex justify-between items-center">
+          <span className="text-xs font-bold uppercase text-[#4D8EFF] tracking-wider">Ticket VIP du Jour</span>
+          <span className="text-xs bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded-full">✓ Validé</span>
+        </div>
+        <div className="flex items-baseline justify-between">
+          <span className="text-3xl font-black text-[#4D8EFF]">{cote.toFixed(2)}</span>
+          <span className="text-xs font-bold text-slate-600">3 Matchs Sélectionnés</span>
+        </div>
+      </div>
+
+      {/* Simulateur de gains */}
+      <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+        <p className="text-xs font-bold text-slate-700">Simulateur de Gains</p>
+        <div className="grid grid-cols-3 gap-2">
+          {[20, 50, 100].map((val) => (
+            <button
+              key={val}
+              onClick={() => setMise(val)}
+              className={`py-2 text-sm font-bold rounded-lg border transition-all ${
+                mise === val
+                  ? 'bg-[#4D8EFF] text-white border-[#4D8EFF]'
+                  : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
+              }`}
+            >
+              {val} €
+            </button>
+          ))}
+        </div>
+        <div className="p-3 bg-white rounded-lg border border-slate-200 text-center">
+          <p className="text-xs text-slate-400">Gain Potentiel Estimé</p>
+          <p className="text-2xl font-black text-slate-900">{(mise * cote).toFixed(2)} €</p>
+          <p className="text-xs text-emerald-600 font-semibold">+{(mise * cote - mise).toFixed(2)} € de bénéfice</p>
+        </div>
+        <button className="w-full py-3 bg-[#4D8EFF] hover:bg-[#3A7BEB] text-white font-bold rounded-xl shadow-md">
+          Copier le combiné sur mon bookmaker
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+### D. Écran 3 : Statistiques & Transparence (`StatsPage.jsx`)
+
+```jsx
+export function StatsPage() {
+  return (
+    <div className="min-h-screen bg-white pb-24 px-4 pt-4 space-y-4">
+      {/* 4 KPIs Clés */}
+      <div className="grid grid-cols-2 gap-3">
+        <div className="p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm">
+          <p className="text-xs text-slate-500">Taux Réussite</p>
+          <p className="text-xl font-black text-slate-900 mt-1">82.4%</p>
+          <span className="text-[11px] font-bold text-emerald-600">↗ +4.1%</span>
+        </div>
+        <div className="p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm">
+          <p className="text-xs text-slate-500">Bénéfice Net</p>
+          <p className="text-xl font-black text-[#4D8EFF] mt-1">+1 840 €</p>
+          <span className="text-[11px] text-slate-400">Mise 100€/pari</span>
+        </div>
+        <div className="p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm">
+          <p className="text-xs text-slate-500">ROI Global</p>
+          <p className="text-xl font-black text-slate-900 mt-1">+28.7%</p>
+          <span className="text-[11px] text-[#4D8EFF] font-semibold">Tier Excellence</span>
+        </div>
+        <div className="p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm">
+          <p className="text-xs text-slate-500">Ratio Paris</p>
+          <p className="text-xl font-black text-slate-900 mt-1">42<span className="text-emerald-600">G</span> / 9<span className="text-rose-500">P</span></p>
+          <span className="text-[11px] text-slate-400">51 pronos au total</span>
+        </div>
+      </div>
+
+      {/* Registre Public Téléchargeable */}
+      <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center space-y-2">
+        <h4 className="text-sm font-bold text-slate-900">Transparence Totale & Registre Public</h4>
+        <p className="text-xs text-slate-500">Aucun pari modifiable après coup. Téléchargez l'historique complet.</p>
+        <button className="px-4 py-2 bg-[#4D8EFF] text-white text-xs font-bold rounded-lg shadow-sm">
+          Télécharger le registre CSV
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+### E. Écran 4 : Espace VIP Abonnements (`VipPage.jsx`)
+
+```jsx
+import { useState } from 'react';
+
+export function VipPage() {
+  const [selectedPlan, setSelectedPlan] = useState('trimestriel');
+
+  return (
+    <div className="min-h-screen bg-white pb-24 px-4 pt-4 space-y-5">
+      <div className="text-center space-y-1">
+        <span className="inline-block px-3 py-1 bg-blue-50 text-[#4D8EFF] text-xs font-bold rounded-full">
+          MEMBRE PRIVILÈGE
+        </span>
+        <h1 className="text-xl font-black text-slate-900">Rejoignez l'élite des parieurs</h1>
+        <p className="text-xs text-slate-500">Algorithmes, data-trading et gestion stricte de bankroll.</p>
+      </div>
+
+      {/* Choix des formules */}
+      <div className="space-y-3">
+        {/* Formule Trimestrielle - En vedette */}
+        <div
+          onClick={() => setSelectedPlan('trimestriel')}
+          className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
+            selectedPlan === 'trimestriel'
+              ? 'border-[#4D8EFF] bg-blue-50/40 shadow-sm'
+              : 'border-slate-200 bg-white'
+          }`}
+        >
+          <div className="flex justify-between items-center">
+            <div>
+              <span className="text-[10px] font-bold uppercase bg-[#4D8EFF] text-white px-2 py-0.5 rounded">
+                Le plus populaire (-25%)
+              </span>
+              <h3 className="font-bold text-slate-900 mt-1">Pass Trimestriel</h3>
+              <p className="text-xs text-slate-500">69,99 € facturés tous les 3 mois</p>
+            </div>
+            <div className="text-right">
+              <span className="text-xl font-black text-[#4D8EFF]">23,33 €</span>
+              <span className="text-xs text-slate-500">/mois</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Formule Mensuelle */}
+        <div
+          onClick={() => setSelectedPlan('mensuel')}
+          className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
+            selectedPlan === 'mensuel'
+              ? 'border-[#4D8EFF] bg-blue-50/40 shadow-sm'
+              : 'border-slate-200 bg-white'
+          }`}
+        >
+          <div className="flex justify-between items-center">
+            <div>
+              <h3 className="font-bold text-slate-900">Pass Mensuel</h3>
+              <p className="text-xs text-slate-500">Sans engagement, résiliable en 1 clic</p>
+            </div>
+            <div className="text-right">
+              <span className="text-xl font-black text-slate-900">29,99 €</span>
+              <span className="text-xs text-slate-500">/mois</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Paiement */}
+      <button className="w-full py-3.5 bg-[#4D8EFF] hover:bg-[#3A7BEB] text-white font-bold rounded-xl shadow-lg shadow-blue-500/20 text-sm">
+        DEVENIR MEMBRE VIP MAINTENANT →
+      </button>
+
+      {/* Réassurance */}
+      <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center text-xs text-slate-600">
+        🛡️ <strong>Garantie 7 jours zéro risque</strong> : remboursement intégral si le ROI est négatif après suivi.
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+## 5. CHECKLIST DE DÉPLOIEMENT
+
+1. **Supprimer le CSS sombre hérité** : inspecter le `body` et les classes Tailwind dans `App.jsx`.
+2. **Vérifier les contrastes WCAG** : Le texte sombre `#0F172A` sur fond `#FFFFFF` offre un ratio supérieur à 12:1 (parfait pour la lecture mobile).
+3. **Optimiser les assets** : Utiliser des icônes SVG légères (Lucide-React ou Heroicons) teintées en `#4D8EFF` ou `#64748B`.
+4. **Tester sur mobile** : Tous les boutons disposent d'une zone tactile minimale de 44px de hauteur pour un confort optimal au clic.

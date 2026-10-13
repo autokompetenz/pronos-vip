@@ -36,13 +36,23 @@ export function Reveal({ as: Tag = 'div', delay = 0, className = '', style, chil
   )
 }
 
-export function SectionHead({ num, eyebrow, title, sub, as: Tag = 'h2' }) {
+export function SectionHead({ num, eyebrow, title, sub, as: Tag = 'h2', center = false }) {
   return (
-    <div className="section-headline">
-      {num && <span className="sec-num" aria-hidden="true">{num}</span>}
-      <p className="eyebrow eyebrow--center">{eyebrow}</p>
-      <Tag>{title}</Tag>
-      {sub && <p className="sub">{sub}</p>}
+    <div className={center ? 'mx-auto max-w-2xl text-center' : 'max-w-2xl'}>
+      {eyebrow && (
+        <p className={`eyebrow flex items-center gap-2 ${center ? 'justify-center' : ''}`}>
+          {num && (
+            <span className="inline-flex h-6 items-center rounded-full bg-blue-50 px-2 text-[11px] font-bold text-brand">
+              {num}
+            </span>
+          )}
+          {eyebrow}
+        </p>
+      )}
+      <Tag className="mt-3 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+        {title}
+      </Tag>
+      {sub && <p className="mt-4 text-base leading-relaxed text-slate-600">{sub}</p>}
     </div>
   )
 }

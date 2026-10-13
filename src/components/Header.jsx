@@ -5,7 +5,7 @@ import { TELEGRAM } from './CtaButtons.jsx'
 const NAV = [
   ['/', 'Accueil'],
   ['/gestion-de-compte', 'Gestion de compte'],
-  ['/compte-russe', 'Compte russe'],
+  ['/', 'Compte russe'],
   ['/gestion-de-compte#marche', 'Comment ça marche'],
   ['/gestion-de-compte#conditions', 'Tarifs'],
   ['/gestion-de-compte#preuves', 'Résultats'],
@@ -26,56 +26,82 @@ export default function Header() {
   const close = () => setOpen(false)
 
   return (
-    <header className="navbar">
-      <div className="navbar-inner">
-        <Link className="brand" to="/" onClick={close}>
-          <span className="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+    <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md">
+      <div className="container-x flex items-center justify-between py-3">
+        <Link to="/" onClick={close} className="flex items-center gap-2.5" aria-label="COMPTE 1XBET RUSSE — Accueil">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand text-white shadow-sm">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
               <path d="M10 6l6 6-6 6 1.5 1.5L19 12l-7.5-7.5L10 6zm-6 0l6 6-6 6L5.5 19 13 12 5.5 4.5 4 6z" />
             </svg>
           </span>
-          <span className="brand-name">COMPTE&nbsp;<em>1XBET RUSSE</em></span>
-          <span className="brand-live" title="Analyses publiées chaque jour">
-            <span className="brand-live-dot" aria-hidden="true" />
+          <span className="text-base font-black tracking-tight text-slate-900 sm:text-lg">
+            COMPTE <span className="text-brand">1XBET RUSSE</span>
+          </span>
+          <span className="ml-1 hidden items-center gap-1.5 rounded-full bg-success-light px-2 py-0.5 text-[11px] font-bold text-success-text sm:inline-flex">
+            <span className="h-1.5 w-1.5 rounded-full bg-success" />
             Live
           </span>
         </Link>
 
-        <nav
-          id="menu"
-          className={open ? 'nav nav--open' : 'nav'}
-          aria-label="Navigation principale"
-        >
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Navigation principale">
           {NAV.map(([href, label]) => (
-            <Link key={href} to={href} className="nav-link" onClick={close}>
+            <Link
+              key={label}
+              to={href}
+              className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
+            >
               {label}
             </Link>
           ))}
           <a
-            className="nav-cta"
+            className="btn btn--primary ml-2 px-4 py-2"
             href={TELEGRAM}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={close}
           >
             Rejoindre le VIP
           </a>
         </nav>
 
         <button
-          className="menu-toggle"
+          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg border border-slate-200 lg:hidden"
           type="button"
           aria-expanded={open}
           aria-controls="menu"
           aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="menu-toggle-line" />
-          <span className="menu-toggle-line" />
-          <span className="menu-toggle-line" />
+          <span className="block h-0.5 w-5 rounded bg-slate-700" />
+          <span className="block h-0.5 w-5 rounded bg-slate-700" />
+          <span className="block h-0.5 w-5 rounded bg-slate-700" />
         </button>
       </div>
-      {open && <div className="nav-scrim" aria-hidden="true" onClick={close} />}
+
+      {open && (
+        <nav id="menu" className="border-t border-slate-100 bg-white lg:hidden" aria-label="Navigation mobile">
+          <div className="container-x flex flex-col py-3">
+            {NAV.map(([href, label]) => (
+              <Link
+                key={label}
+                to={href}
+                onClick={close}
+                className="rounded-lg px-3 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                {label}
+              </Link>
+            ))}
+            <a
+              className="btn btn--primary mt-2"
+              href={TELEGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={close}
+            >
+              Rejoindre le VIP
+            </a>
+          </div>
+        </nav>
+      )}
     </header>
   )
 }

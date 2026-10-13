@@ -65,15 +65,38 @@ const OBTAIN = [
   },
 ]
 
+function ListCard({ title, items, highlight = false }) {
+  return (
+    <div className={`card h-full p-6 ${highlight ? 'border-blue-200 bg-blue-50/40' : ''}`}>
+      <h3 className="text-lg font-bold text-slate-900">{title}</h3>
+      <ul className="mt-3 space-y-2">
+        {items.map((item) => (
+          <li key={item} className="flex items-start gap-2 text-sm leading-relaxed text-slate-600">
+            <span
+              className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] text-white ${
+                highlight ? 'bg-brand' : 'bg-slate-400'
+              }`}
+            >
+              ✓
+            </span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 export default function CompteRusse() {
   useEffect(() => {
-    document.title = 'Le compte 1xBet Russe — COMPTE 1XBET RUSSE'
+    document.title = 'COMPTE 1XBET RUSSE — Le compte de pari 1xBet Russe'
   }, [])
 
   return (
     <>
-      <section className="section-pad page-hero">
-        <div className="container">
+      {/* Hero */}
+      <section className="bg-gradient-to-b from-blue-50 via-blue-50/40 to-white">
+        <div className="container-x py-14 sm:py-20">
           <Reveal>
             <SectionHead
               as="h1"
@@ -83,15 +106,16 @@ export default function CompteRusse() {
             />
           </Reveal>
           <Reveal delay={90}>
-            <div className="cta-row section-cta">
+            <div className="mt-7">
               <CtaButtons secondary />
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="section-pad section--alt" id="creation">
-        <div className="container">
+      {/* 01 La création */}
+      <section id="creation" className="section section--alt">
+        <div className="container-x">
           <Reveal>
             <SectionHead
               num="01"
@@ -100,20 +124,25 @@ export default function CompteRusse() {
               sub="Une création authentique suit un processus technique précis, en trois étapes."
             />
           </Reveal>
-          <ol className="timeline">
+          <ol className="mt-10 space-y-4">
             {CREATE_STEPS.map((s, i) => (
-              <Reveal as="li" className="timeline-row" key={s.title} delay={i * 80}>
-                <span className="timeline-stone" aria-hidden="true">{s.icon}</span>
-                <div className="timeline-card">
-                  <span className="timeline-chip">ÉTAPE {fmt(i + 1)}</span>
-                  <h3 className="timeline-title">{s.title}</h3>
-                  <p className="timeline-text">{s.text}</p>
+              <Reveal as="li" key={s.title} delay={i * 80} className="flex gap-4">
+                <span
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-xl"
+                  aria-hidden="true"
+                >
+                  {s.icon}
+                </span>
+                <div className="card flex-1 p-5">
+                  <span className="label-meta text-brand">ÉTAPE {fmt(i + 1)}</span>
+                  <h3 className="mt-1 font-bold text-slate-900">{s.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-600">{s.text}</p>
                 </div>
               </Reveal>
             ))}
           </ol>
           <Reveal delay={120}>
-            <p className="note-line">
+            <p className="mt-6 text-sm leading-relaxed text-slate-500">
               NB : pour vos commandes, vous êtes libre de choisir la devise dans laquelle vous
               souhaitez que votre compte soit créé.
             </p>
@@ -121,8 +150,9 @@ export default function CompteRusse() {
         </div>
       </section>
 
-      <section className="section-pad" id="soi-meme">
-        <div className="container">
+      {/* 02 De votre côté */}
+      <section id="soi-meme" className="section">
+        <div className="container-x">
           <Reveal>
             <SectionHead
               num="02"
@@ -131,43 +161,48 @@ export default function CompteRusse() {
               sub="Ceux qui ont des correspondants en Russie peuvent être tentés de créer le compte eux-mêmes — voici ce qu’il faut savoir."
             />
           </Reveal>
-          <Reveal delay={90}>
-            <div className="split">
-              <div className="split-card">
-                <h3>Le processus authentique</h3>
-                <p>
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            <Reveal>
+              <div className="card h-full p-6">
+                <h3 className="text-lg font-bold text-slate-900">Le processus authentique</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   Une création authentique du compte 1xBet Russe prend en compte la création des
                   informations de base, l’installation des caractéristiques d’encodage et un VPN
-                  intégré lors de l’encodage. Une création qui ignore ces étapes n’est pas un
-                  compte russe complet.
+                  intégré lors de l’encodage. Une création qui ignore ces étapes n’est pas un compte
+                  russe complet.
                 </p>
               </div>
-              <div className="split-card sol-card">
-                <h3>Attention aux arnaques</h3>
-                <p>
-                  Beaucoup se font arnaquer par des prétentions de comptes russes « premium » :
-                  ce ne sont que des versions arrangées. Il n’existe qu’une seule version
-                  authentique du 1xBet Russe — et, sans l’encodage, votre compte ne sera qu’un
-                  compte standard.
+            </Reveal>
+            <Reveal delay={90}>
+              <div className="card h-full border-blue-200 bg-blue-50/40 p-6">
+                <h3 className="text-lg font-bold text-slate-900">Attention aux arnaques</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                  Beaucoup se font arnaquer par des prétentions de comptes russes « premium » : ce ne
+                  sont que des versions arrangées. Il n’existe qu’une seule version authentique du
+                  1xBet Russe — et, sans l’encodage, votre compte ne sera qu’un compte standard.
                 </p>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
           <Reveal delay={140}>
-            <p className="contact-line">
+            <p className="mt-8 text-sm text-slate-600">
               Une question sur votre commande ? Écrivez-nous sur{' '}
-              <a className="contact-tg" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
+              <a className="link" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
                 Telegram
               </a>{' '}
               ({TELEGRAM_TEXT}) ou appelez-nous au{' '}
-              <a className="contact-phone" href={PHONE_HREF}>{PHONE}</a>.
+              <a className="link" href={PHONE_HREF}>
+                {PHONE}
+              </a>
+              .
             </p>
           </Reveal>
         </div>
       </section>
 
-      <section className="section-pad section--alt" id="difference">
-        <div className="container">
+      {/* 03 La différence */}
+      <section id="difference" className="section section--alt">
+        <div className="container-x">
           <Reveal>
             <SectionHead
               num="03"
@@ -176,31 +211,20 @@ export default function CompteRusse() {
               sub="Un compte russe est très différent des comptes de jeu standard que vous avez l’habitude de créer."
             />
           </Reveal>
-          <Reveal delay={90}>
-            <div className="split">
-              <div className="split-card">
-                <h3>Compte standard</h3>
-                <ul className="solution-list">
-                  {STANDARD_CARD.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="split-card sol-card">
-                <h3>Compte russe</h3>
-                <ul className="solution-list">
-                  {RUSSIAN_CARD.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </Reveal>
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            <Reveal>
+              <ListCard title="Compte standard" items={STANDARD_CARD} />
+            </Reveal>
+            <Reveal delay={90}>
+              <ListCard title="Compte russe" items={RUSSIAN_CARD} highlight />
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      <section className="section-pad" id="renouvellement">
-        <div className="container">
+      {/* 04 Après la commande */}
+      <section id="renouvellement" className="section">
+        <div className="container-x">
           <Reveal>
             <SectionHead
               num="04"
@@ -210,21 +234,21 @@ export default function CompteRusse() {
             />
           </Reveal>
           <Reveal delay={90}>
-            <div className="split-card sol-card">
-              <h3>Votre routine quotidienne</h3>
-              <p>
-                Après l’obtention de votre compte, tout est simple : vous copiez et collez le
-                code du coupon que nous envoyons chaque jour, puis vous misez selon vos
-                objectifs. Le compte lui-même n’est pas renouvelable : il est créé une fois pour
-                de bon.
+            <div className="card mt-8 border-blue-200 bg-blue-50/40 p-6">
+              <h3 className="text-lg font-bold text-slate-900">Votre routine quotidienne</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                Après l’obtention de votre compte, tout est simple : vous copiez et collez le code du
+                coupon que nous envoyons chaque jour, puis vous misez selon vos objectifs. Le compte
+                lui-même n’est pas renouvelable : il est créé une fois pour de bon.
               </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="section-pad section--alt" id="utilite">
-        <div className="container">
+      {/* 05 L'utilité */}
+      <section id="utilite" className="section section--alt">
+        <div className="container-x">
           <Reveal>
             <SectionHead
               num="05"
@@ -233,16 +257,16 @@ export default function CompteRusse() {
               sub="Un espace privé dont vous disposez sur le bookmaker, qui sécurise votre façon de parier au quotidien."
             />
           </Reveal>
-          <ul className="cards">
+          <ul className="mt-10 grid gap-5 sm:grid-cols-2">
             {UTILITY.map((u, i) => (
               <Reveal as="li" key={u.title} delay={i * 70}>
-                <div className="benefit">
-                  <span className="benefit-icon" aria-hidden="true">{u.icon}</span>
-                  <div className="benefit-top">
-                    <h3 className="benefit-title">{u.title}</h3>
-                    <span className="benefit-index">{u.index}</span>
+                <div className="card h-full p-6">
+                  <span className="text-2xl" aria-hidden="true">{u.icon}</span>
+                  <div className="mt-4 flex items-center justify-between">
+                    <h3 className="text-lg font-bold text-slate-900">{u.title}</h3>
+                    <span className="text-sm font-black text-slate-300">{u.index}</span>
                   </div>
-                  <p className="benefit-text">{u.text}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{u.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -250,8 +274,9 @@ export default function CompteRusse() {
         </div>
       </section>
 
-      <section className="section-pad" id="obtenir">
-        <div className="container">
+      {/* 06 L'obtention */}
+      <section id="obtenir" className="section">
+        <div className="container-x">
           <Reveal>
             <SectionHead
               num="06"
@@ -260,23 +285,26 @@ export default function CompteRusse() {
               sub="Deux choses à savoir avant de commander."
             />
           </Reveal>
-          <div className="secure-grid">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2">
             {OBTAIN.map((o, i) => (
-              <Reveal as="div" className="secure-item" key={o.title} delay={i * 70}>
-                <span className="secure-icon" aria-hidden="true">{o.icon}</span>
-                <h3>{o.title}</h3>
-                <p>{o.text}</p>
+              <Reveal as="div" key={o.title} delay={i * 70} className="card p-6">
+                <span className="text-2xl" aria-hidden="true">{o.icon}</span>
+                <h3 className="mt-3 text-lg font-bold text-slate-900">{o.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">{o.text}</p>
               </Reveal>
             ))}
           </div>
           <Reveal delay={120}>
-            <p className="secure-note">
+            <p className="mt-8 text-sm leading-relaxed text-slate-600">
               Pour commander votre compte russe, contactez-nous sur{' '}
-              <a className="mention" href={TELEGRAM} target="_blank" rel="noopener noreferrer">{TELEGRAM_TEXT}</a>.
+              <a className="link" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
+                {TELEGRAM_TEXT}
+              </a>
+              .
             </p>
           </Reveal>
           <Reveal delay={150}>
-            <div className="cta-row section-cta">
+            <div className="mt-8">
               <CtaButtons secondary />
             </div>
           </Reveal>
