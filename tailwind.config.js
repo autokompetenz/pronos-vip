@@ -8,6 +8,7 @@ export default {
           DEFAULT: '#4D8EFF',
           light: '#EBF2FF',
           dark: '#2B6EE3',
+          deep: '#1E5FCC',
           hover: '#3A7BEB',
         },
         surface: {
@@ -36,10 +37,12 @@ export default {
           'Roboto',
           'sans-serif',
         ],
+        display: ['Plus Jakarta Sans', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         soft: '0 1px 2px 0 rgba(15, 23, 42, 0.04), 0 1px 3px 0 rgba(15, 23, 42, 0.06)',
         card: '0 4px 16px -4px rgba(15, 23, 42, 0.08)',
+        float: '0 18px 40px -18px rgba(15, 23, 42, 0.25)',
       },
     },
   },

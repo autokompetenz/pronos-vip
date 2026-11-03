@@ -1,237 +1,210 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import CtaButtons, {
-  TELEGRAM,
-  TELEGRAM_TEXT,
-  PHONE,
-  PHONE_HREF,
-  WHATSAPP,
-} from '../components/CtaButtons.jsx'
+import { TELEGRAM, PHONE, PHONE_HREF, WHATSAPP } from '../components/CtaButtons.jsx'
 import { Reveal, SectionHead } from '../components/ui.jsx'
 
-const BOOKS = ['1xBet', '1Win', 'Melbet', 'Linebet', 'Winamax', 'Betclic', 'Unibet', 'Bwin']
-
 const TRUST = [
-  { big: '10 000 F', small: 'pour démarrer' },
-  { big: '25 %', small: 'de commission que si gain' },
-  { big: '5–10 min', small: 'retrait Mobile Money' },
+  { big: '10 000 F', small: 'Dépôt pour démarrer' },
+  { big: '25 %', small: 'Commission si gain' },
+  { big: '5–10 min', small: 'Retrait Mobile Money' },
 ]
 
-const SOLUTION = ['Gestion du compte', 'Sélection des paris', 'Suivi des résultats', 'Assistance']
-
-function HeroCard() {
-  return (
-    <div className="card overflow-hidden p-0">
-      <div className="p-5">
-        <span className="label-meta rounded-full bg-blue-50 px-2.5 py-1 text-brand">Exemple offert</span>
-        <p className="mt-3 flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-500">
-          Ligue des Champions
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-success-light px-2 py-0.5 text-[11px] font-bold text-success-text">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-success" />
-            EN DIRECT
-          </span>
-        </p>
-        <p className="mt-3 flex items-center gap-3 text-xl font-black text-slate-900">
-          <span>PSG</span>
-          <span className="text-xs font-bold text-slate-400">VS</span>
-          <span>Real Madrid</span>
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 divide-y divide-slate-100 border-t border-slate-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-        <div className="p-4">
-          <span className="label-meta text-slate-400">Pronostic</span>
-          <p className="mt-1 text-sm font-bold text-slate-900">Les deux équipes marquent</p>
-        </div>
-        <div className="p-4">
-          <span className="label-meta text-slate-400">Cote</span>
-          <p className="mt-1 text-xl font-black text-brand tnum">1,85</p>
-        </div>
-        <div className="p-4">
-          <span className="label-meta text-slate-400">Confiance</span>
-          <p className="mt-1 text-sm font-bold text-success-text">Élevée</p>
-          <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
-            <div className="h-full rounded-full bg-brand" style={{ width: '85%' }} />
-          </div>
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between border-t border-slate-100 bg-surface-subtle px-5 py-3">
-        <small className="text-xs text-slate-400">Exemple fourni par nos experts</small>
-        <strong className="text-xs font-bold text-slate-700">VIP · AMES1X</strong>
-      </div>
-    </div>
-  )
-}
+const SERVICES = [
+  {
+    icon: '🇷🇺',
+    title: 'Le Compte 1xBet Russe',
+    text: 'Un compte authentique encodé avec VPN intégré vous donnant accès aux championnats russes exclusifs, sans limites de mise et avec votre propre devise.',
+    points: [
+      'Drapeau russe visible sur votre profil',
+      'Cotes plus élevées et marchés confidentiels',
+      'Création définitive en une seule fois',
+    ],
+    to: '/compte-russe',
+    cta: 'Voir les preuves & commander',
+  },
+  {
+    icon: '📈',
+    title: 'La Gestion de Compte 1xBet',
+    text: 'Vous nous confiez votre compte : nos traders placent les paris au bon moment et suivent l’objectif fixé. Vous encaissez en toute sécurité.',
+    points: [
+      'Démarrage dès 10 000 FCFA',
+      '25 % de commission uniquement si vous gagnez',
+      'Retraits en 5 à 10 minutes sur Mobile Money',
+    ],
+    to: '/gestion-de-compte',
+    cta: 'Calculer vos gains & commencer',
+    badge: 'Populaire',
+  },
+]
 
 export default function Home() {
   useEffect(() => {
-    document.title = 'COMPTE 1XBET RUSSE — Gestion de compte 1xBet : Comment faire ?'
+    document.title = 'COMPTE 1XBET RUSSE — Accueil'
   }, [])
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 via-blue-50/40 to-white">
-        <div className="container-x grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-2">
-          <div>
-            <p className="eyebrow">Gestion de compte 1xBet</p>
-            <h1 className="mt-4 text-4xl font-black leading-[1.05] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-              Les pronostics qui <span className="text-brand">font la différence</span>
-            </h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
-              Nos experts analysent les cotes, placent les paris et font grimper votre compte 1xBet.
-              Vous encaissez, en toute simplicité.
+      <section className="relative isolate overflow-hidden bg-gradient-to-b from-blue-50 via-white to-white pb-12 pt-8 sm:pb-24 sm:pt-20">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute -right-20 -top-24 h-64 w-64 rounded-full bg-brand/15 blur-3xl" />
+          <div className="absolute -left-24 top-48 h-56 w-56 rounded-full bg-emerald-200/40 blur-3xl" />
+        </div>
+
+        <div className="container-x">
+          <div className="max-w-3xl">
+            <p className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/80 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-brand-dark shadow-sm backdrop-blur sm:text-xs">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              Service VIP &amp; cotes russes
             </p>
 
-            <ul className="mt-7 grid max-w-md grid-cols-3 gap-3">
+            <h1 className="mt-4 text-[1.7rem] font-black leading-[1.15] tracking-tight text-slate-900 text-balance sm:text-5xl lg:text-6xl">
+              Gagnez avec le <span className="text-brand">Compte 1xBet Russe</span> &amp; notre
+              Gestion VIP
+            </h1>
+
+            <p className="mt-4 text-sm leading-relaxed text-slate-600 text-pretty sm:mt-5 sm:text-lg">
+              Découvrez la puissance d’un compte de pari encodé pour les championnats russes et
+              confiez votre capital à nos traders experts, avec une commission uniquement sur les
+              gains.
+            </p>
+
+            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
+              <Link to="/compte-russe" className="btn btn--primary w-full px-6 sm:w-auto">
+                Découvrir le compte russe
+                <span aria-hidden="true">🇷🇺</span>
+              </Link>
+              <Link to="/gestion-de-compte" className="btn btn--ghost w-full px-6 sm:w-auto">
+                Voir la gestion de compte
+                <span aria-hidden="true">📈</span>
+              </Link>
+            </div>
+
+            <div className="mt-8 grid grid-cols-3 gap-2 sm:mt-12 sm:gap-4">
               {TRUST.map((item) => (
-                <li
-                  key={item.big}
-                  className="rounded-xl border border-slate-200 bg-white/70 p-3 text-center backdrop-blur"
-                >
-                  <span className="block text-base font-black text-slate-900 tnum">{item.big}</span>
-                  <span className="mt-0.5 block text-[11px] leading-tight text-slate-500">
+                <div key={item.big} className="fintech-card p-3 text-center sm:p-4">
+                  <span className="tnum block text-base font-black leading-tight text-slate-900 sm:text-2xl">
+                    {item.big}
+                  </span>
+                  <span className="mt-1 block text-[10px] font-medium leading-snug text-slate-600 sm:text-xs">
                     {item.small}
                   </span>
-                </li>
+                </div>
               ))}
-            </ul>
-
-            <div className="mt-8">
-              <CtaButtons secondary />
             </div>
           </div>
-
-          <Reveal>
-            <HeroCard />
-          </Reveal>
         </div>
       </section>
 
-      {/* Bandeau bookmakers */}
-      <div className="marquee-wrap overflow-hidden border-y border-slate-100 bg-white py-5" aria-hidden="true">
-        <div className="marquee-track">
-          {[0, 1].map((k) => (
-            <span key={k} className="flex shrink-0 items-center gap-8 px-4">
-              <span className="eyebrow whitespace-nowrap">Bookmakers</span>
-              {BOOKS.map((book) => (
-                <span
-                  key={book}
-                  className="flex items-center gap-2 whitespace-nowrap text-sm font-semibold text-slate-400"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-brand/50" />
-                  {book}
-                </span>
-              ))}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* 01 Le constat */}
-      <section id="probleme" className="section">
+      {/* Les 2 services clés */}
+      <section className="section border-t border-slate-100 bg-slate-50/70">
         <div className="container-x">
           <Reveal>
             <SectionHead
-              num="01"
-              eyebrow="Le constat"
-              title="Vous pariez. Vous perdez. Vous recommencez."
-              sub="Des mises répétées, des cotes mal choisies, des résultats qui ne suivent pas — c’est le quotidien de trop de parieurs."
+              center
+              eyebrow="Nos 2 pôles"
+              title="Choisissez votre accompagnement"
+              sub="Deux solutions conçues pour maximiser vos gains sur 1xBet."
             />
           </Reveal>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
-            <Reveal>
-              <div className="card h-full p-6">
-                <h3 className="text-lg font-bold text-slate-900">Le problème</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                  Des mises répétées, des cotes mal choisies, des résultats qui ne suivent pas. Le
-                  budget et la motivation s’épuisent, sans stratégie ni suivi.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={90}>
-              <div className="card h-full border-blue-200 bg-blue-50/40 p-6">
-                <h3 className="text-lg font-bold text-slate-900">Notre solution</h3>
-                <ul className="mt-3 space-y-2">
-                  {SOLUTION.map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[11px] text-white">
-                        ✓
+          <div className="mt-8 grid gap-4 sm:mt-12 sm:gap-8 md:grid-cols-2">
+            {SERVICES.map((service, i) => (
+              <Reveal key={service.title} delay={i * 90}>
+                <article className="fintech-card flex h-full flex-col p-5 hover:border-brand sm:p-8">
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="icon-tile h-12 w-12 rounded-2xl bg-blue-50 text-2xl" aria-hidden="true">
+                      {service.icon}
+                    </span>
+                    {service.badge && (
+                      <span className="badge-tag bg-brand-dark text-white shadow-sm shadow-brand-dark/20">
+                        {service.badge}
                       </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          </div>
+                    )}
+                  </div>
 
-          <Reveal delay={140}>
-            <div className="mt-8">
-              <Link className="btn btn--primary" to="/gestion-de-compte">
-                Découvrir la gestion de compte
-              </Link>
-            </div>
-          </Reveal>
+                  <h3 className="mt-4 text-xl font-black text-slate-900 sm:text-2xl">
+                    {service.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{service.text}</p>
+
+                  <ul className="mt-5 space-y-2.5 text-sm text-slate-700">
+                    {service.points.map((point) => (
+                      <li key={point} className="flex items-start gap-2.5">
+                        <span className="check-dot" aria-hidden="true">
+                          ✓
+                        </span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-auto pt-6">
+                    <Link to={service.to} className="btn btn--primary w-full">
+                      {service.cta}
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* CTA final */}
-      <section id="contact" className="section pt-0">
+      <section className="section pt-2 sm:pt-24">
         <div className="container-x">
-          <div className="overflow-hidden rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 to-white p-8 sm:p-12">
-            <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-center">
-              <div>
-                <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
-                  Prêt à commencer ?
-                </h2>
-                <p className="mt-4 max-w-xl text-slate-600">
-                  Découvrez notre fonctionnement, choisissez votre formule et rejoignez le VIP. La
-                  commission ne s’applique que si vous gagnez.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <a className="btn btn--primary" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
-                    Rejoindre sur Telegram
-                  </a>
-                  <a className="btn btn--ghost" href={WHATSAPP} target="_blank" rel="noopener noreferrer">
-                    WhatsApp
-                  </a>
-                </div>
-                <p className="mt-4 text-sm text-slate-500">
-                  Code promo <strong className="text-slate-900">AMES1X</strong> à l’inscription sur le
-                  bookmaker.
-                </p>
-              </div>
+          <div className="relative overflow-hidden rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-blue-50/60 p-5 text-center shadow-soft sm:p-12">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand/10 blur-3xl"
+            />
+            <span className="badge-tag bg-white text-brand-dark shadow-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              Assistance 7j/7
+            </span>
+            <h2 className="mt-3 text-2xl font-black text-slate-900 text-balance sm:text-4xl">
+              Besoin d’un renseignement immédiat ?
+            </h2>
+            <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-slate-600 sm:text-base">
+              Notre assistance est disponible 7j/7 pour vous orienter dans la création de votre
+              compte russe ou le lancement de votre gestion.
+            </p>
 
-              <Reveal delay={120}>
-                <div className="card p-6">
-                  <p className="label-meta text-slate-400">Code promo</p>
-                  <p className="text-2xl font-black tracking-[0.2em] text-brand">AMES1X</p>
-                  <div className="mt-4 space-y-3 text-sm">
-                    <div className="flex items-center justify-between border-t border-slate-100 pt-3">
-                      <span className="text-slate-500">Telegram</span>
-                      <a className="link" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
-                        {TELEGRAM_TEXT}
-                      </a>
-                    </div>
-                    <div className="flex items-center justify-between border-t border-slate-100 pt-3">
-                      <span className="text-slate-500">WhatsApp</span>
-                      <a className="link" href={WHATSAPP} target="_blank" rel="noopener noreferrer">
-                        Ouvrir le chat
-                      </a>
-                    </div>
-                    <div className="flex items-center justify-between border-t border-slate-100 pt-3">
-                      <span className="text-slate-500">Téléphone</span>
-                      <a className="link" href={PHONE_HREF}>
-                        {PHONE}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
+            <div className="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
+              <a
+                className="btn btn--primary w-full px-8 sm:w-auto"
+                href={TELEGRAM}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Canal Telegram
+                <span aria-hidden="true">→</span>
+              </a>
+              <a
+                className="btn btn--ghost w-full px-8 font-bold text-emerald-700 sm:w-auto"
+                href={WHATSAPP}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Discussion WhatsApp
+              </a>
             </div>
+
+            <p className="mt-5 text-xs text-slate-500">
+              Assistance directe :{' '}
+              <a
+                className="font-bold text-brand-dark hover:underline"
+                href={PHONE_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {PHONE}
+              </a>
+            </p>
           </div>
         </div>
       </section>

@@ -1,12 +1,6 @@
 import { useEffect } from 'react'
-import CtaButtons, {
-  TELEGRAM,
-  TELEGRAM_TEXT,
-  PHONE,
-  PHONE_HREF,
-  WHATSAPP,
-} from '../components/CtaButtons.jsx'
-import Carousel from '../components/Carousel.jsx'
+import CtaButtons, { TELEGRAM, PHONE, PHONE_HREF, WHATSAPP } from '../components/CtaButtons.jsx'
+import EarningsSimulator from '../components/EarningsSimulator.jsx'
 import ProofsCarousel from '../components/ProofsCarousel.jsx'
 import { Reveal, SectionHead, fmt } from '../components/ui.jsx'
 
@@ -14,483 +8,342 @@ const BENEFITS = [
   {
     index: '01',
     icon: '👨‍💼',
-    title: 'Experts',
-    text: 'Des traders analystes sélectionnent les paris et placent au bon moment, même en direct.',
+    title: 'Traders Professionnels',
+    text: 'Nos experts analysent les marchés et sélectionnent les paris avec rigueur, même en direct.',
   },
   {
     index: '02',
     icon: '🎯',
-    title: 'Meilleures cotes',
-    text: 'Marchés exclusifs et cotes étudiées sur votre compte 1xBet Russe.',
+    title: 'Marchés Ciblés',
+    text: 'Exploitation des cotes russes pour maximiser le retour sur investissement.',
   },
   {
     index: '03',
     icon: '📈',
-    title: 'Performance',
-    text: 'Objectif atteint ? Vous êtes prévenu immédiatement pour retirer en toute sécurité.',
+    title: 'Objectif Atteint',
+    text: 'Dès que l’objectif convenu est atteint, vous êtes immédiatement invité à effectuer le retrait.',
   },
   {
     index: '04',
     icon: '🤝',
-    title: 'Commission',
-    text: '25 % uniquement sur les bénéfices réalisés. Rien si on ne gagne pas.',
+    title: 'Commission 25%',
+    text: 'La commission ne s’applique que sur les bénéfices nets réalisés. Rien en cas d’échec.',
   },
 ]
 
 const STEPS = [
   {
     icon: '🚀',
-    title: 'Définissez votre objectif',
-    text: 'Vous choisissez votre objectif et déposez le montant de départ, à partir de 10 000 FCFA.',
+    title: 'Définissez votre capital & objectif',
+    text: 'Vous commencez avec un dépôt de départ accessible (à partir de 10 000 FCFA).',
   },
   {
     icon: '📊',
-    title: 'Nos traders opèrent',
-    text: 'Ils sélectionnent les paris et placent au bon moment, selon le fonctionnement du service — même en direct.',
+    title: 'Les traders opèrent sur votre compte',
+    text: 'Placement stratégique des coupons selon les meilleures opportunités.',
   },
   {
     icon: '📈',
-    title: 'Suivi pas à pas',
-    text: 'Vous suivez l’évolution du compte à chaque résultat.',
+    title: 'Suivi transparent',
+    text: 'Vous pouvez consulter l’évolution des résultats en temps réel sur votre compte.',
   },
   {
     icon: '🔔',
-    title: 'Alerte retrait',
-    text: 'Vous êtes informé immédiatement dès que le retrait devient possible.',
+    title: 'Validation & Retrait immédiat',
+    text: 'Vous retirez directement votre argent sur votre Mobile Money ou portefeuille crypto.',
   },
-  {
-    icon: '🤝',
-    title: 'Commission 25 %',
-    text: 'Elle ne s’applique que sur les bénéfices réalisés. Rien si on ne gagne pas.',
-  },
-]
-
-const FLOW = [
-  { label: 'Départ', value: '50 000 FCFA' },
-  { label: 'Objectif', value: '3 000 000 FCFA' },
-  { label: 'Bénéfice visé', value: '2 950 000 FCFA' },
-  { label: 'Commission 25 %', value: '737 500 FCFA' },
-  { label: 'Montant net', value: '2 262 500 FCFA' },
-]
-
-const OPTIONS = [
-  { title: 'Option 1', target: '350 000 FCFA', deposit: '10 000 F', popular: false },
-  { title: 'Option 2', target: '500 000 FCFA', deposit: '15 000 F', popular: false },
-  { title: 'Option 3', target: '750 000 FCFA', deposit: '20 000 F', popular: false },
-  { title: 'Option 4', target: '1 million FCFA', deposit: '25 000 F', popular: true },
-  { title: 'Option 5', target: '1 500 000 FCFA', deposit: '30 000 F', popular: false },
 ]
 
 const WITHDRAW_STEPS = [
-  'Ouvrez le solde (le chiffre vert) puis cliquez sur « Retirer des fonds ».',
-  'Choisissez la méthode : Mobile Money (le plus rapide) ou crypto.',
-  'Entrez le montant à retirer (minimum souvent 3 000 FCFA ou 1 $).',
-  'Indiquez le numéro Mobile Money ou l’adresse wallet.',
-  'Validez avec le code reçu par SMS.',
-  'Terminé : l’argent arrive en 5 à 10 minutes.',
+  'Cliquez sur votre solde puis sur « Retirer des fonds ».',
+  'Choisissez Mobile Money (Wave, Orange, MTN, Moov) ou Crypto.',
+  'Indiquez le montant à retirer et votre numéro de téléphone.',
+  'Confirmez avec le code de sécurité reçu par SMS.',
+  'Réception des fonds en 5 à 10 minutes directement sur votre compte.',
 ]
 
-const SECURITY = [
-  { icon: '🔐', title: 'Sécurité', text: 'Validation du propriétaire du compte.' },
-  { icon: '📱', title: 'Vérification', text: 'Code envoyé sur le moyen de contact associé.' },
-  { icon: '💳', title: 'Retrait', text: 'Validation avant traitement.' },
-]
+const PAYMENTS = ['Wave', 'Orange Money', 'MTN', 'Moov', 'Crypto']
 
 const FAQ = [
   {
     q: 'Faut-il un dépôt important pour commencer ?',
-    a: 'Non : vous démarrez à partir de 10 000 FCFA selon l’objectif choisi.',
+    a: 'Non, vous pouvez démarrer dès 10 000 FCFA selon l’objectif choisi.',
   },
   {
     q: 'La commission s’applique-t-elle en cas de perte ?',
-    a: 'Non. La commission de 25 % ne porte que sur les bénéfices réalisés.',
+    a: 'Absolument pas. La commission de 25 % est prélevée uniquement sur les bénéfices nets générés.',
   },
   {
-    q: 'Comment sont sélectionnés les paris ?',
-    a: 'Nos traders analysent les cotes et les marchés, y compris en direct, selon le fonctionnement du service.',
+    q: 'Quand et comment puis-je retirer mes gains ?',
+    a: 'Dès que l’objectif est complété, vous retirez vous-même vos gains en 5 à 10 minutes via Mobile Money.',
   },
   {
-    q: 'Quand puis-je retirer mes gains ?',
-    a: 'Dès que l’objectif est atteint, vous êtes prévenu immédiatement pour retirer en toute sécurité.',
-  },
-  {
-    q: 'Le service respecte-t-il le jeu responsable ?',
-    a: 'Oui : le jeu comporte des risques et est réservé aux 18+. Les performances passées ne garantissent pas les résultats futurs.',
+    q: 'Puis-je suivre l’évolution des paris ?',
+    a: 'Oui, vous conservez l’accès à votre compte et suivez l’historique des paris en direct.',
   },
 ]
 
-function OptionCard({ option }) {
-  return (
-    <div
-      className={`relative flex w-[240px] shrink-0 flex-col rounded-2xl border bg-white p-6 shadow-soft sm:w-[260px] ${
-        option.popular ? 'border-brand ring-2 ring-brand/15' : 'border-slate-200'
-      }`}
-    >
-      {option.popular && (
-        <span className="absolute -top-3 left-6 rounded-full bg-brand px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
-          Le plus choisi
-        </span>
-      )}
-      <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{option.title}</p>
-      <p className="mt-1 text-2xl font-black text-slate-900 tnum">{option.target}</p>
-      <p className="mt-2 text-sm text-slate-600">
-        <strong className="text-slate-900">{option.deposit}</strong> de dépôt seulement
-      </p>
-      <a className="btn btn--primary mt-5" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
-        Choisir
-      </a>
-    </div>
-  )
-}
+const HERO_POINTS = ['Dès 10 000 FCFA', '25 % seulement si gain', 'Retrait 5–10 min']
 
 export default function GestionCompte() {
   useEffect(() => {
-    document.title = 'Gestion de compte 1xBet — COMPTE 1XBET RUSSE'
+    document.title = 'Gestion de Compte 1xBet — Service VIP'
   }, [])
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-gradient-to-b from-blue-50 via-blue-50/40 to-white">
-        <div className="container-x py-14 sm:py-20">
+      <section className="relative isolate overflow-hidden bg-gradient-to-b from-blue-50 via-white to-white pb-10 pt-8 sm:pb-20 sm:pt-20">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-brand/15 blur-3xl" />
+          <div className="absolute -left-20 top-40 h-48 w-48 rounded-full bg-emerald-200/30 blur-3xl" />
+        </div>
+        <div className="container-x">
           <Reveal>
             <SectionHead
               as="h1"
-              eyebrow="Le service"
+              eyebrow="Service VIP clé en main"
               title="Gestion de compte 1xBet"
-              sub="Vous nous confiez votre compte 1xBet : nos experts sélectionnent les paris, placent au bon moment et suivent chaque résultat. La commission ne s’applique que si vous gagnez."
+              sub="Confiez votre compte à des experts qui sélectionnent les meilleures opportunités et gèrent votre bankroll. Commission de 25 % uniquement si vous gagnez."
             />
           </Reveal>
+
           <Reveal delay={90}>
-            <div className="mt-7">
+            <div className="mt-6 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:flex-wrap">
               <CtaButtons secondary />
+            </div>
+          </Reveal>
+
+          <Reveal delay={140}>
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {HERO_POINTS.map((point) => (
+                <li
+                  key={point}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/80 px-2.5 py-1 text-[11px] font-semibold text-slate-600 backdrop-blur sm:text-xs"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Simulateur interactif */}
+      <section
+        id="conditions"
+        className="section border-y border-slate-100 bg-slate-50/70 pt-10 sm:pt-16"
+      >
+        <div className="container-x">
+          <Reveal>
+            <div id="tarifs">
+              <EarningsSimulator />
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* 01 Pourquoi nous */}
-      <section id="service" className="section section--alt">
+      {/* Avantages */}
+      <section className="section">
         <div className="container-x">
           <Reveal>
             <SectionHead
               num="01"
               eyebrow="Pourquoi nous"
-              title="La gestion de compte 1xBet, concrètement"
-              sub="Vous nous confiez votre compte 1xBet. Nos experts sélectionnent les paris, placent au bon moment et suivent chaque résultat."
+              title="Une gestion rigoureuse et sécurisée"
+              sub="Une méthode éprouvée pour faire croître votre capital sans stress."
             />
           </Reveal>
-          <ul className="mt-10 grid gap-5 sm:grid-cols-2">
-            {BENEFITS.map((b, i) => (
-              <Reveal as="li" key={b.title} delay={i * 70}>
-                <div className="card h-full p-6">
-                  <span className="text-2xl" aria-hidden="true">{b.icon}</span>
-                  <div className="mt-4 flex items-center justify-between">
-                    <h3 className="text-lg font-bold text-slate-900">{b.title}</h3>
-                    <span className="text-sm font-black text-slate-300">{b.index}</span>
+
+          <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6">
+            {BENEFITS.map((benefit, i) => (
+              <Reveal key={benefit.title} delay={i * 70}>
+                <article className="fintech-card h-full p-5 sm:p-6">
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="icon-tile" aria-hidden="true">
+                      {benefit.icon}
+                    </span>
+                    <span className="rounded-lg bg-slate-50 px-2 py-1 text-[11px] font-black text-slate-500">
+                      {benefit.index}
+                    </span>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{b.text}</p>
-                </div>
+                  <h3 className="mt-4 text-base font-bold text-slate-900 sm:text-lg">
+                    {benefit.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{benefit.text}</p>
+                </article>
               </Reveal>
             ))}
-          </ul>
-          <Reveal delay={160}>
-            <div className="mt-8">
-              <CtaButtons />
-            </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* 02 Comment ça marche */}
-      <section id="marche" className="section">
+      {/* Processus */}
+      <section id="marche" className="section border-t border-slate-100 bg-slate-50/70">
         <div className="container-x">
           <Reveal>
             <SectionHead
               num="02"
-              eyebrow="Comment ça marche"
-              title="Le processus en 5 étapes"
-              sub="De votre dépôt jusqu’à l’encaissement, chaque étape est claire, suivie et sans stress."
+              eyebrow="Fonctionnement"
+              title="Le parcours en 4 étapes simples"
+              sub="De votre dépôt jusqu’à l’encaissement final sur votre Mobile Money."
             />
           </Reveal>
-          <ol className="mt-10 space-y-4">
-            {STEPS.map((s, i) => (
-              <Reveal as="li" key={s.title} delay={i * 80} className="flex gap-4">
-                <span
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-xl"
-                  aria-hidden="true"
-                >
-                  {s.icon}
-                </span>
-                <div className="card flex-1 p-5">
-                  <span className="label-meta text-brand">STEP {fmt(i + 1)}</span>
-                  <h3 className="mt-1 font-bold text-slate-900">{s.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-slate-600">{s.text}</p>
+
+          <ol className="mt-8 space-y-3 sm:mt-10 sm:space-y-4">
+            {STEPS.map((step, i) => (
+              <Reveal as="li" key={step.title} delay={i * 80} className="flex gap-3 sm:gap-4">
+                <div className="flex flex-col items-center">
+                  <span className="icon-tile h-10 w-10 text-lg sm:h-12 sm:w-12 sm:text-xl" aria-hidden="true">
+                    {step.icon}
+                  </span>
+                  {i < STEPS.length - 1 && <span className="mt-1 w-px flex-1 bg-slate-200" />}
+                </div>
+                <div className="fintech-card mb-1 flex-1 p-4 sm:p-5">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-brand-dark sm:text-xs">
+                      Étape {fmt(i + 1)}
+                    </span>
+                    <span className="h-1 w-8 rounded-full bg-brand/25" />
+                  </div>
+                  <h3 className="mt-1 text-sm font-bold text-slate-900 sm:text-base">{step.title}</h3>
+                  <p className="mt-1 text-[13px] leading-relaxed text-slate-600 sm:text-sm">
+                    {step.text}
+                  </p>
                 </div>
               </Reveal>
             ))}
           </ol>
-
-          <Reveal delay={100}>
-            <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-              <div className="card p-6">
-                <h3 className="text-lg font-bold text-slate-900">Vous gardez la maîtrise</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                  Vous suivez l’évolution du compte à chaque résultat, informé immédiatement dès que
-                  le retrait devient possible.
-                </p>
-              </div>
-              <img
-                className="w-full rounded-2xl border border-slate-200 shadow-soft"
-                src="/images/deposit-app.webp"
-                alt="la gestion de compte 1xbet — dépôt depuis l’application"
-                width="1280"
-                height="901"
-                loading="lazy"
-              />
-            </div>
-          </Reveal>
         </div>
       </section>
 
-      {/* 03 Exemple concret */}
-      <section id="exemple" className="section section--alt">
+      {/* Guide retrait */}
+      <section className="section">
         <div className="container-x">
           <Reveal>
             <SectionHead
               num="03"
-              eyebrow="Un cas réel"
-              title="Exemple concret pour les parieurs"
-              sub="Simulation d’un accompagnement : départ 50 000 FCFA, objectif 3 000 000 FCFA."
+              eyebrow="Retrait rapide"
+              title="Comment retirer vos gains en 5 à 10 minutes ?"
+              sub="Vous gardez le plein contrôle sur vos retraits d’argent."
             />
           </Reveal>
-          <Reveal delay={80}>
-            <div className="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-soft">
-              {FLOW.map((f, i) => (
-                <div
-                  key={f.label}
-                  className={`flex items-center justify-between gap-4 px-5 py-4 ${
-                    i % 2 ? 'bg-surface-subtle' : ''
-                  }`}
-                >
-                  <span className="flex items-center gap-3">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-light text-xs font-bold text-brand">
-                      {i + 1}
-                    </span>
-                    <span className="text-sm font-semibold text-slate-600">{f.label}</span>
-                  </span>
-                  <span
-                    className={`text-sm font-black tnum ${
-                      i === FLOW.length - 1 ? 'text-brand' : 'text-slate-900'
-                    }`}
-                  >
-                    {f.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-          <Reveal delay={120}>
-            <p className="mt-6 text-sm font-semibold text-slate-700">
-              Zéro stress : vous suivez l’évolution, nos experts travaillent, vous encaissez.
-            </p>
-            <p className="mt-1 text-xs text-slate-400">
-              Simulation illustrative : les résultats réels varient selon les marchés et les cotes.
-            </p>
-          </Reveal>
-          <Reveal delay={150}>
-            <div className="mt-8">
-              <CtaButtons />
-            </div>
-          </Reveal>
+
+          <ol className="mt-8 grid gap-3 sm:mt-10 lg:grid-cols-2">
+            {WITHDRAW_STEPS.map((step, i) => (
+              <li
+                key={step}
+                className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-soft"
+              >
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-dark text-xs font-bold text-white">
+                  {i + 1}
+                </span>
+                <p className="pt-1 text-[13px] font-medium leading-relaxed text-slate-700 sm:text-sm">
+                  {step}
+                </p>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+              Moyens acceptés
+            </span>
+            {PAYMENTS.map((payment) => (
+              <span
+                key={payment}
+                className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
+              >
+                {payment}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* 04 Tarifs */}
-      <section id="conditions" className="section">
+      {/* Preuves carrousel */}
+      <section id="preuves" className="section border-t border-slate-100 bg-slate-50/70">
         <div className="container-x">
           <Reveal>
             <SectionHead
               num="04"
-              eyebrow="Tarifs"
-              title="Conditions de la gestion de compte 1xBet"
-              sub="Choisissez votre objectif. La commission ne s’applique que si vous gagnez."
+              eyebrow="Résultats"
+              title="Preuves de retraits & transactions"
+              sub="Captures des soldes et retraits effectués pour nos clients."
             />
           </Reveal>
-          <Reveal delay={80}>
-            <div className="mt-10">
-              <Carousel
-                label="Offres de gestion de compte 1xBet"
-                slides={OPTIONS.map((option) => (
-                  <OptionCard key={option.title} option={option} />
-                ))}
-              />
-            </div>
-          </Reveal>
-
-          <p className="mt-8 text-center text-sm font-semibold text-slate-500">
-            La commission, seulement si vous gagnez
-          </p>
-
-          <Reveal delay={60}>
-            <div className="mt-6 flex flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-6 py-8 text-center">
-              <span className="eyebrow">Commission</span>
-              <span className="text-5xl font-black text-slate-900 tnum">25&nbsp;%</span>
-              <p className="max-w-md text-sm leading-relaxed text-slate-600">
-                Uniquement selon les bénéfices réalisés et les conditions du service.
-              </p>
-            </div>
-          </Reveal>
-
-          <h3 className="mt-14 text-2xl font-black tracking-tight text-slate-900">
-            Sécurité &amp; vérification
-          </h3>
-          <div className="mt-6 grid gap-5 sm:grid-cols-3">
-            {SECURITY.map((s, i) => (
-              <Reveal as="div" key={s.title} delay={i * 70} className="card p-6">
-                <span className="text-2xl" aria-hidden="true">{s.icon}</span>
-                <h3 className="mt-3 font-bold text-slate-900">{s.title}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-slate-600">{s.text}</p>
-              </Reveal>
-            ))}
+          <div className="mt-8 sm:mt-10">
+            <ProofsCarousel />
           </div>
-          <Reveal delay={90}>
-            <p className="mt-6 text-sm leading-relaxed text-slate-600">
-              Chaque retrait est soumis à une validation de sécurité. Nous ne travaillons qu’avec des
-              personnes sérieuses —{' '}
-              <a className="link" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
-                {TELEGRAM_TEXT}
-              </a>
-              .
-            </p>
-          </Reveal>
         </div>
       </section>
 
-      {/* 05 Guide retrait */}
-      <section id="retrait" className="section section--alt">
+      {/* FAQ */}
+      <section id="faq" className="section">
         <div className="container-x">
           <Reveal>
             <SectionHead
               num="05"
-              eyebrow="Guide express"
-              title="Comment retirer les gains du compte ?"
-              sub="Rapide et sécurisé : encaissez en 5 à 10 minutes via Mobile Money ou crypto."
-            />
-          </Reveal>
-          <Reveal delay={90}>
-            <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-              <ol className="space-y-3">
-                {WITHDRAW_STEPS.map((step, i) => (
-                  <li
-                    key={i}
-                    className="flex gap-3 rounded-xl border border-slate-200 bg-white p-3.5 shadow-soft"
-                  >
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">
-                      {i + 1}
-                    </span>
-                    <p className="text-sm leading-relaxed text-slate-700">{step}</p>
-                  </li>
-                ))}
-              </ol>
-              <img
-                className="w-full rounded-2xl border border-slate-200 shadow-soft"
-                src="/images/retrait.jpg"
-                alt="1xBet — retirer des fonds (solde et méthodes)"
-                width="1024"
-                height="569"
-                loading="lazy"
-              />
-            </div>
-          </Reveal>
-          <Reveal delay={120}>
-            <p className="mt-8 text-sm text-slate-600">
-              Une question ? Écrivez-nous sur{' '}
-              <a className="link" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
-                Telegram
-              </a>{' '}
-              ({TELEGRAM_TEXT}) ou appelez-nous au{' '}
-              <a className="link" href={PHONE_HREF}>
-                {PHONE}
-              </a>
-              .
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 06 Preuves */}
-      <section id="preuves" className="section">
-        <div className="container-x">
-          <Reveal>
-            <SectionHead
-              num="06"
-              eyebrow="Ils gagnent déjà"
-              title="Voici quelques preuves de la gestion de compte 1xBet"
-              sub="Des comptes 1xBet réellement accompagnés par nos experts."
-            />
-          </Reveal>
-          <Reveal delay={80}>
-            <div className="mt-10">
-              <ProofsCarousel />
-            </div>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="mt-6 text-center text-xs leading-relaxed text-slate-400">
-              Les captures présentées sont fournies à titre illustratif. Les performances passées ne
-              garantissent pas les résultats futurs.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 07 FAQ */}
-      <section id="faq" className="section section--alt">
-        <div className="container-x">
-          <Reveal>
-            <SectionHead
-              num="07"
               eyebrow="FAQ"
               title="Questions fréquentes"
-              sub="Tout ce qu’il faut savoir avant de commencer."
+              sub="Toutes les réponses avant de commencer la gestion de votre compte."
             />
           </Reveal>
-          <Reveal delay={80}>
-            <div className="mt-10 space-y-3">
-              {FAQ.map((item, i) => (
-                <details key={item.q} className="group card overflow-hidden">
-                  <summary className="flex cursor-pointer list-none items-center gap-3 p-5 [&::-webkit-details-marker]:hidden">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-brand">
+
+          <div className="mt-8 space-y-3 sm:max-w-3xl">
+            {FAQ.map((item, i) => (
+              <details
+                key={item.q}
+                className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-soft transition-colors open:border-blue-200 open:bg-blue-50/20"
+              >
+                <summary className="flex min-h-[56px] cursor-pointer items-center justify-between gap-3 p-4 font-semibold text-slate-900 sm:p-5">
+                  <span className="flex items-start gap-3">
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-brand-light text-[10px] font-black text-brand-deep">
                       {fmt(i + 1)}
                     </span>
-                    <span className="flex-1 font-bold text-slate-900">{item.q}</span>
-                    <span className="text-xl leading-none text-brand transition-transform duration-200 group-open:rotate-45">
-                      +
-                    </span>
-                  </summary>
-                  <p className="border-t border-slate-100 px-5 py-4 text-sm leading-relaxed text-slate-600">
-                    {item.a}
-                  </p>
-                </details>
-              ))}
+                    <span className="text-sm sm:text-base">{item.q}</span>
+                  </span>
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-lg font-medium text-brand-dark transition-transform duration-200 group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="border-t border-slate-100 px-4 py-4 text-[13px] leading-relaxed text-slate-600 sm:px-5 sm:text-sm">
+                  {item.a}
+                </p>
+              </details>
+            ))}
+          </div>
+
+          <div className="mt-8 rounded-2xl border border-blue-100 bg-blue-50/60 p-5 sm:mt-10 sm:max-w-xl sm:p-6">
+            <h3 className="font-bold text-slate-900">Une autre question ?</h3>
+            <p className="mt-1 text-sm text-slate-600">
+              Contactez-nous directement sur WhatsApp ou Telegram.
+            </p>
+            <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+              <a
+                className="btn btn--primary w-full sm:w-auto"
+                href={TELEGRAM}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Telegram
+              </a>
+              <a
+                className="btn btn--ghost w-full text-emerald-700 sm:w-auto"
+                href={WHATSAPP}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                WhatsApp
+              </a>
             </div>
-          </Reveal>
-          <Reveal delay={120}>
-            <div className="mt-8 rounded-2xl border border-blue-100 bg-blue-50/50 p-6 text-center">
-              <h3 className="text-lg font-bold text-slate-900">Encore une question ?</h3>
-              <p className="mt-1 text-sm text-slate-600">
-                Écrivez-nous sur Telegram ou WhatsApp, on vous répond rapidement.
-              </p>
-              <div className="mt-4 flex flex-wrap justify-center gap-3">
-                <a className="btn btn--primary" href={TELEGRAM} target="_blank" rel="noopener noreferrer">
-                  Telegram
-                </a>
-                <a className="btn btn--ghost" href={WHATSAPP} target="_blank" rel="noopener noreferrer">
-                  WhatsApp
-                </a>
-              </div>
-            </div>
-          </Reveal>
+            <p className="mt-3 text-[11px] text-slate-500">
+              Ou par téléphone :{' '}
+              <a className="font-bold text-brand-dark hover:underline" href={PHONE_HREF}>
+                {PHONE}
+              </a>
+            </p>
+          </div>
         </div>
       </section>
     </>

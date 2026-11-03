@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-route
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import BottomCta from './components/BottomCta.jsx'
+import FloatingContact from './components/FloatingContact.jsx'
 import Home from './pages/Home.jsx'
 import GestionCompte from './pages/GestionCompte.jsx'
 import CompteRusse from './pages/CompteRusse.jsx'
@@ -45,15 +46,22 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollManager />
-      <div className="min-h-[100dvh] bg-white pb-20 sm:pb-0">
+      <div className="min-h-[100dvh] bg-white pb-[calc(4.75rem+env(safe-area-inset-bottom,0px))] sm:pb-0">
+        <a
+          href="#contenu"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-xl focus:bg-brand-dark focus:px-4 focus:py-3 focus:text-sm focus:font-bold focus:text-white"
+        >
+          Aller au contenu
+        </a>
+
         <div
           ref={progressRef}
-          className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left scale-x-0 bg-brand"
+          className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left scale-x-0 bg-brand-dark"
           aria-hidden="true"
         />
         <Header />
 
-        <main>
+        <main id="contenu">
           <Routes>
             <Route path="/" element={<CompteRusse />} />
             <Route path="/accueil" element={<Home />} />
@@ -65,6 +73,7 @@ export default function App() {
 
         <Footer />
         <BottomCta />
+        <FloatingContact />
       </div>
     </BrowserRouter>
   )

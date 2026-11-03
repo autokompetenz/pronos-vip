@@ -78,7 +78,7 @@ export default function Carousel({ slides, label, auto = false }) {
   const resume = () => setPaused(false)
 
   const arrowClass =
-    'hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-soft transition hover:bg-slate-50 sm:flex'
+    'hidden h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-soft transition hover:bg-slate-50 disabled:opacity-40 disabled:hover:bg-white sm:flex'
 
   return (
     <div
@@ -95,6 +95,7 @@ export default function Carousel({ slides, label, auto = false }) {
           type="button"
           aria-label={`${label} — précédent`}
           onClick={() => go(Math.max(0, index - 1))}
+          disabled={index === 0}
         >
           ←
         </button>
@@ -103,6 +104,16 @@ export default function Carousel({ slides, label, auto = false }) {
           className="carousel-track flex-1 py-1"
           ref={trackRef}
           onScroll={onScroll}
+          onKeyDown={(event) => {
+            if (event.key === 'ArrowRight') {
+              event.preventDefault()
+              go(Math.min(maxIndex, index + 1))
+            }
+            if (event.key === 'ArrowLeft') {
+              event.preventDefault()
+              go(Math.max(0, index - 1))
+            }
+          }}
           tabIndex={0}
           role="region"
           aria-roledescription="carrousel"
@@ -116,23 +127,30 @@ export default function Carousel({ slides, label, auto = false }) {
           type="button"
           aria-label={`${label} — suivant`}
           onClick={() => go(Math.min(maxIndex, index + 1))}
+          disabled={index === maxIndex}
         >
           →
         </button>
       </div>
 
-      <div className="mt-5 flex justify-center gap-2" role="group" aria-label={label}>
+      <div className="mt-3 flex justify-center" role="group" aria-label={`${label} — navigation`}>
         {Array.from({ length: maxIndex + 1 }).map((_, i) => (
           <button
             key={i}
-            className={`h-2 rounded-full transition-all ${
-              i === index ? 'w-6 bg-brand' : 'w-2 bg-slate-300 hover:bg-slate-400'
-            }`}
+            className="group flex h-10 w-8 items-center justify-center"
             type="button"
-            aria-label={`Aller au contenu ${i + 1}`}
+            aria-label={`${label} — diapositive ${i + 1}`}
             aria-current={i === index ? 'true' : undefined}
             onClick={() => go(i)}
-          />
+          >
+            <span
+              className={`block h-1.5 rounded-full transition-all duration-200 ${
+                i === index
+                  ? 'w-6 bg-brand-dark'
+                  : 'w-2 bg-slate-300 group-hover:bg-slate-400'
+              }`}
+            />
+          </button>
         ))}
       </div>
     </div>
